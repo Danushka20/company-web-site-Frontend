@@ -7,6 +7,6 @@ const HomePage: React.FC = () => {
       <p className="mt-4">This is the home page. Explore our team members from the menu.</p>
     </div>
   );
-};
+}; 
 
 export default HomePage;
