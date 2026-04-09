@@ -1,14 +1,48 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import smartKodersLogo from '../../assets/smartkoders-logo.jpg';
 
 const Navbar: React.FC = () => {
+  const navItems = ['Home', 'About', 'Services', 'Projects', 'Interns', 'Contact'];
+
   return (
-    <nav className="bg-slate-800 text-white p-4 flex justify-between items-center">
-      <div className="font-bold text-xl">Company Website</div>
-      <div className="space-x-4">
-        <Link to="/" className="hover:underline">Home</Link>
-        <Link to="/users" className="hover:underline">Team</Link>
-        <Link to="/dashboard" className="hover:underline">Dashboard</Link>
+    <nav
+      className="fixed left-1/2 top-5 z-[2200] w-[95%] max-w-[1250px] -translate-x-1/2 rounded-full border border-slate-200/90 bg-[#f2f3f5] px-5 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-sm"
+      aria-label="Main navigation"
+    >
+      <div className="flex items-center justify-between gap-4">
+        <a className="inline-flex items-center no-underline" href="#home" aria-label="Go to top">
+          <img
+            className="block h-15 w-auto object-contain md:h-14"
+            src={smartKodersLogo}
+            alt="SmartKoders"
+          />
+        </a>
+
+        <ul className="m-0 hidden list-none items-center justify-center gap-9 p-0 md:flex">
+          {navItems.map((item) => (
+            <li key={item}>
+              <a
+                href={`#${item.toLowerCase()}`}
+                className="text-[21px] font-medium leading-none text-slate-600 no-underline transition-colors duration-200 hover:text-blue-600"
+              >
+                {item}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        <a
+          className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 px-7 text-[28px] font-medium leading-none text-white no-underline shadow-[0_8px_20px_rgba(37,99,235,0.38)] transition-[transform,box-shadow] duration-200 hover:-translate-y-px hover:shadow-[0_12px_24px_rgba(37,99,235,0.45)]"
+          href="#contact"
+        >
+          Get in Touch
+          <span
+            className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-white/20 text-[18px]"
+            aria-hidden="true"
+          >
+            →
+          </span>
+        </a>
       </div>
     </nav>
   );
