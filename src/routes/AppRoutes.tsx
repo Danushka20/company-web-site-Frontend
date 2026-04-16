@@ -1,6 +1,9 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import HomePage from '../pages/HomePage.tsx';
+import AboutPage from '../pages/AboutPage.tsx';
+import ServicesPage from '../pages/ServicesPage.tsx';
+import ContactPage from '../pages/ContactPage.tsx';
 import DashboardPage from '../pages/dashboard/DashboardPage.tsx';
 import UserListPage from '../pages/users/UserListPage.tsx';
 import DashboardLayout from '../layouts/DashboardLayout.tsx';
@@ -13,6 +16,9 @@ const AppRoutes: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/about" element={<AboutPage />} />
+      <Route path="/services" element={<ServicesPage />} />
+      <Route path="/contact" element={<ContactPage />} />
       <Route element={<DashboardLayout />}>
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/users" element={<UserListPage />} />

@@ -877,6 +877,6 @@ const HomePage: React.FC = () => {
       <section id="contact" aria-hidden="true" className="home-anchor" />
     </div>
   );
-};
+}; 
 
 export default HomePage;
