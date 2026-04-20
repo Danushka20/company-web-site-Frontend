@@ -1,6 +1,6 @@
 import React from 'react';
 import { Mail, Globe, RadioTower, Workflow, Camera } from 'lucide-react';
-import smartKodersLogo from '../../assets/smartkoders-logo.jpg';
+import smartKodersLogo from '../../assets/company-logo.png';
 
 const Footer: React.FC = () => {
   const socialLinks = [

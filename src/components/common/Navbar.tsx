@@ -1,8 +1,37 @@
 import React from 'react';
-import smartKodersLogo from '../../assets/smartkoders-logo.jpg';
+import { useLocation } from 'react-router-dom';
+import smartKodersLogo from '../../assets/company-logo.png';
 
 const Navbar: React.FC = () => {
-  const navItems = ['Home', 'About', 'Services', 'Projects', 'Interns', 'Contact'];
+  const location = useLocation();
+  const navItems = [
+    { label: 'Home', href: '/' },
+    { label: 'About', href: '/about' },
+    { label: 'Services', href: '/services' },
+    { label: 'Projects', href: '/#projects' },
+    { label: 'Interns', href: '/#interns' },
+    { label: 'Contact', href: '/contact' },
+  ];
+
+  const isActiveItem = (label: string) => {
+    if (label === 'About') {
+      return location.pathname === '/about';
+    }
+
+    if (label === 'Home') {
+      return location.pathname === '/' && (location.hash === '' || location.hash === '#home');
+    }
+
+    if (label === 'Services') {
+      return location.pathname === '/services';
+    }
+
+    if (label === 'Contact') {
+      return location.pathname === '/contact';
+    }
+
+    return false;
+  };
 
   return (
     <nav
@@ -10,7 +39,7 @@ const Navbar: React.FC = () => {
       aria-label="Main navigation"
     >
       <div className="flex items-center justify-between gap-4">
-        <a className="inline-flex items-center no-underline" href="#home" aria-label="Go to top">
+        <a className="inline-flex items-center no-underline" href="/" aria-label="Go to top">
           <img
             className="block h-15 w-auto object-contain md:h-14"
             src={smartKodersLogo}
@@ -20,12 +49,14 @@ const Navbar: React.FC = () => {
 
         <ul className="m-0 hidden list-none items-center justify-center gap-9 p-0 md:flex">
           {navItems.map((item) => (
-            <li key={item}>
+            <li key={item.label}>
               <a
-                href={`#${item.toLowerCase()}`}
-                className="text-[21px] font-medium leading-none text-slate-600 no-underline transition-colors duration-200 hover:text-blue-600"
+                href={item.href}
+                className={`text-[21px] font-medium leading-none no-underline transition-colors duration-200 hover:text-blue-600 ${
+                  isActiveItem(item.label) ? 'text-blue-600' : 'text-slate-600'
+                }`}
               >
-                {item}
+                {item.label}
               </a>
             </li>
           ))}
@@ -33,7 +64,7 @@ const Navbar: React.FC = () => {
 
         <a
           className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 px-7 text-[28px] font-medium leading-none text-white no-underline shadow-[0_8px_20px_rgba(37,99,235,0.38)] transition-[transform,box-shadow] duration-200 hover:-translate-y-px hover:shadow-[0_12px_24px_rgba(37,99,235,0.45)]"
-          href="#contact"
+          href="/contact"
         >
           Get in Touch
           <span
