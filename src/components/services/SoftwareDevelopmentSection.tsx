@@ -1,28 +1,29 @@
-import React from 'react';
-import { Code2, Smartphone, Database } from 'lucide-react';
+import React from "react";
+import { Code2, Smartphone, Database } from "lucide-react";
+import ServiceProductsStrip from "./ServiceProductsStrip";
 
 /* ─── Expertise Cards ─── */
 const expertiseItems = [
   {
     icon: Code2,
-    title: 'Web Applications',
+    title: "Web Applications",
     description:
-      'Modern, responsive web applications built with React, Angular, Vue.js, and other cutting-edge frameworks.',
-    accent: '#255ddf',
+      "Modern, responsive web applications built with React, Angular, Vue.js, and other cutting-edge frameworks.",
+    accent: "#255ddf",
   },
   {
     icon: Smartphone,
-    title: 'Mobile Development',
+    title: "Mobile Development",
     description:
-      'Native and cross platform mobile applications for iOS and Android using Flutter, React Native, and Swift.',
-    accent: '#255ddf',
+      "Native and cross platform mobile applications for iOS and Android using Flutter, React Native, and Swift.",
+    accent: "#255ddf",
   },
   {
     icon: Database,
-    title: 'Enterprise Systems',
+    title: "Enterprise Systems",
     description:
-      'Robust enterprise resource planning (ERP) and customer relationship management (CRM) systems.',
-    accent: '#255ddf',
+      "Robust enterprise resource planning (ERP) and customer relationship management (CRM) systems.",
+    accent: "#255ddf",
   },
 ];
 
@@ -45,8 +46,9 @@ const SoftwareDevelopmentSection: React.FC = () => {
             </h1>
 
             <p className="m-0 mt-7 max-w-[520px] text-[clamp(0.97rem,1.1vw,1.18rem)] leading-[1.74] text-[#344b64]">
-              We build scalable, secure, and innovative software solutions tailored to your
-              business needs. From web applications to enterprise systems, we deliver excellence.
+              We build scalable, secure, and innovative software solutions
+              tailored to your business needs. From web applications to
+              enterprise systems, we deliver excellence.
             </p>
           </div>
 
@@ -71,7 +73,8 @@ const SoftwareDevelopmentSection: React.FC = () => {
               Our Expertise
             </h2>
             <p className="m-0 mt-3 text-[1.02rem] text-[#255ddf]">
-              We specialize in cutting-edge technologies and modern development practices
+              We specialize in cutting-edge technologies and modern development
+              practices
             </p>
           </div>
 
@@ -123,6 +126,8 @@ const SoftwareDevelopmentSection: React.FC = () => {
               />
             </div>
           </div>
+
+          <ServiceProductsStrip label="View Our Software Products" />
 
           {/* CTA */}
           <div className="mt-14 text-center">

@@ -1,25 +1,26 @@
-import React from 'react';
-import { Radio, Zap, Settings } from 'lucide-react';
+import React from "react";
+import { Radio, Zap, Settings } from "lucide-react";
+import ServiceProductsStrip from "./ServiceProductsStrip";
 
 /* ─── IoT Expertise Cards ─── */
 const iotExpertiseItems = [
   {
     icon: Radio,
-    title: 'Smart Sensors',
+    title: "Smart Sensors",
     description:
-      'Advanced sensor integration for temperature, humidity, motion, and environmental monitoring.',
+      "Advanced sensor integration for temperature, humidity, motion, and environmental monitoring.",
   },
   {
     icon: Zap,
-    title: 'Real-Time Analytics',
+    title: "Real-Time Analytics",
     description:
-      'Live data processing and visualization dashboards for instant insights and decision making.',
+      "Live data processing and visualization dashboards for instant insights and decision making.",
   },
   {
     icon: Settings,
-    title: 'Device Management',
+    title: "Device Management",
     description:
-      'Centralised control and monitoring of all connected devices with remote configuration capabilities.',
+      "Centralised control and monitoring of all connected devices with remote configuration capabilities.",
   },
 ];
 
@@ -42,8 +43,9 @@ const IoTSolutionsSection: React.FC = () => {
             </h1>
 
             <p className="m-0 mt-7 max-w-[520px] text-[clamp(0.97rem,1.1vw,1.18rem)] leading-[1.74] text-[#344b64]">
-              Transform your business with intelligent IoT solutions that connect devices, collect
-              data, and drive actionable insights for smarter decision-making.
+              Transform your business with intelligent IoT solutions that
+              connect devices, collect data, and drive actionable insights for
+              smarter decision-making.
             </p>
           </div>
 
@@ -128,6 +130,8 @@ const IoTSolutionsSection: React.FC = () => {
               />
             </div>
           </div>
+
+          <ServiceProductsStrip label="View Our IoT Products" />
 
           {/* CTA */}
           <div className="mt-14 text-center">

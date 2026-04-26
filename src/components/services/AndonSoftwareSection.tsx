@@ -1,25 +1,26 @@
-import React from 'react';
-import { Cpu, Zap, Code2 } from 'lucide-react';
+import React from "react";
+import { Cpu, Zap, Code2 } from "lucide-react";
+import ServiceProductsStrip from "./ServiceProductsStrip";
 
 /* ─── Software Features Cards ─── */
 const softwareFeatures = [
   {
     icon: Cpu,
-    title: 'Real-Time Dashboard',
+    title: "Real-Time Dashboard",
     description:
-      'Live production line status with customizable widgets, KPI tracking, and instant alert notifications.',
+      "Live production line status with customizable widgets, KPI tracking, and instant alert notifications.",
   },
   {
     icon: Zap,
-    title: 'Alert Management',
+    title: "Alert Management",
     description:
-      'Intelligent alert routing with SMS, email, and mobile push notifications for immediate response.',
+      "Intelligent alert routing with SMS, email, and mobile push notifications for immediate response.",
   },
   {
     icon: Code2,
-    title: 'API Integration',
+    title: "API Integration",
     description:
-      'RESTful APIs for seamless integration with existing ERP, MES, and SCADA systems.',
+      "RESTful APIs for seamless integration with existing ERP, MES, and SCADA systems.",
   },
 ];
 
@@ -42,8 +43,9 @@ const AndonSoftwareSection: React.FC = () => {
             </h1>
 
             <p className="m-0 mt-7 max-w-[520px] text-[clamp(0.97rem,1.1vw,1.18rem)] leading-[1.74] text-[#344b64]">
-              Our Androit software platform provides real-time monitoring, analytics, and alert
-              management for seamless production line oversight and rapid issue resolution.
+              Our Androit software platform provides real-time monitoring,
+              analytics, and alert management for seamless production line
+              oversight and rapid issue resolution.
             </p>
           </div>
 
@@ -128,6 +130,8 @@ const AndonSoftwareSection: React.FC = () => {
               />
             </div>
           </div>
+
+          <ServiceProductsStrip label="View Our Andon Software" />
 
           {/* CTA */}
           <div className="mt-14 text-center">

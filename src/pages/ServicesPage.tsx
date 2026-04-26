@@ -61,7 +61,7 @@ const ServicesPage: React.FC = () => {
         </>
       )}
 
-      <div className="about-footer-soft -mx-4 sm:-mx-6 lg:-mx-10">
+      <div className="-mx-4 about-footer-soft sm:-mx-6 lg:-mx-10">
         <Footer />
       </div>
     </main>

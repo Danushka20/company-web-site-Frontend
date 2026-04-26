@@ -1,24 +1,25 @@
-import React from 'react';
-import { Bell, RadioTower, Wrench } from 'lucide-react';
+import React from "react";
+import { Bell, RadioTower, Wrench } from "lucide-react";
+import ServiceProductsStrip from "./ServiceProductsStrip";
 
 const hardwareComponents = [
   {
     icon: Wrench,
-    title: 'LED Displays',
+    title: "LED Displays",
     description:
-      'High brightness LED matrix displays with multi color support for clear visibility in any lighting condition.',
+      "High brightness LED matrix displays with multi color support for clear visibility in any lighting condition.",
   },
   {
     icon: Bell,
-    title: 'Tower Lights',
+    title: "Tower Lights",
     description:
-      'Multi tier signal tower lights with red, yellow, and green indicators plus optional buzzer for audio alerts.',
+      "Multi tier signal tower lights with red, yellow, and green indicators plus optional buzzer for audio alerts.",
   },
   {
     icon: RadioTower,
-    title: 'Control Panels',
+    title: "Control Panels",
     description:
-      'Ruggedized push button control panels with IP65 rating for harsh industrial environments.',
+      "Ruggedized push button control panels with IP65 rating for harsh industrial environments.",
   },
 ];
 
@@ -39,8 +40,9 @@ const AndonHardwareSection: React.FC = () => {
             </h1>
 
             <p className="m-0 mt-7 max-w-[540px] text-[clamp(0.97rem,1.1vw,1.15rem)] leading-[1.74] text-[#344b64]">
-              Purpose-built industrial hardware including LED displays, tower lights, push
-              buttons, and control panels designed for 24/7 manufacturing environments.
+              Purpose-built industrial hardware including LED displays, tower
+              lights, push buttons, and control panels designed for 24/7
+              manufacturing environments.
             </p>
           </div>
 
@@ -79,9 +81,13 @@ const AndonHardwareSection: React.FC = () => {
                     <Icon size={22} strokeWidth={2} aria-hidden="true" />
                   </div>
 
-                  <h3 className="m-0 mt-5 text-[1.15rem] font-semibold text-[#070a12]">{item.title}</h3>
+                  <h3 className="m-0 mt-5 text-[1.15rem] font-semibold text-[#070a12]">
+                    {item.title}
+                  </h3>
 
-                  <p className="m-0 mt-3 text-[0.97rem] leading-[1.7] text-[#344b64]">{item.description}</p>
+                  <p className="m-0 mt-3 text-[0.97rem] leading-[1.7] text-[#344b64]">
+                    {item.description}
+                  </p>
                 </article>
               );
             })}
@@ -109,6 +115,8 @@ const AndonHardwareSection: React.FC = () => {
               />
             </div>
           </div>
+
+          <ServiceProductsStrip label="View Our Andon Hardware" />
 
           <div className="mt-14 text-center">
             <a
