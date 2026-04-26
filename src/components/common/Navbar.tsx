@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import smartKodersLogo from "../../assets/company-logo.png";
 import { serviceItems } from "../../data/servicesData";
 import { useDropdownClose } from "../../hooks/useDropdownClose";
@@ -9,6 +9,7 @@ const Navbar: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const isServicesPage = location.pathname.startsWith("/services");
   const selectedServicePath = isServicesPage ? location.pathname : "";
 
@@ -70,7 +71,7 @@ const Navbar: React.FC = () => {
       <div className="flex items-center justify-between gap-4">
         <Link className="inline-flex items-center no-underline" to="/" aria-label="Go to top">
           <img
-            className="block h-15 w-auto object-contain md:h-14"
+            className="block h-10 w-auto object-contain md:h-12 lg:h-14"
             src={smartKodersLogo}
             alt="SmartKoders"
           />
@@ -163,7 +164,7 @@ const Navbar: React.FC = () => {
         </ul>
 
         <a
-          className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 px-7 text-[28px] font-medium leading-none text-white no-underline shadow-[0_8px_20px_rgba(37,99,235,0.38)] transition-[transform,box-shadow] duration-200 hover:-translate-y-px hover:shadow-[0_12px_24px_rgba(37,99,235,0.45)]"
+          className="hidden md:inline-flex h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 px-7 text-[16px] lg:text-[18px] font-medium leading-none text-white no-underline shadow-[0_8px_20px_rgba(37,99,235,0.38)] transition-[transform,box-shadow] duration-200 hover:-translate-y-px hover:shadow-[0_12px_24px_rgba(37,99,235,0.45)]"
           href="/contact"
         >
           Get in Touch
@@ -174,7 +175,89 @@ const Navbar: React.FC = () => {
             →
           </span>
         </a>
+
+        <button
+          type="button"
+          className="inline-flex md:hidden items-center justify-center p-2 text-slate-600 hover:text-blue-600 bg-transparent border-none cursor-pointer"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle mobile menu"
+        >
+          {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+        </button>
       </div>
+
+      {/* Mobile Menu */}
+      {isMobileMenuOpen && (
+        <div className="absolute left-0 top-[110%] w-full rounded-[18px] border border-slate-200 bg-[#f6f7f9] p-5 shadow-[0_18px_30px_rgba(9,30,66,0.2)] md:hidden">
+          <ul className="m-0 flex flex-col gap-4 list-none p-0">
+            {navItems.map((item) => (
+              <li key={item.label}>
+                {item.label === "Services" ? (
+                  <div className="flex flex-col gap-2">
+                    <button 
+                      className={`flex w-full items-center justify-between text-lg font-medium border-none bg-transparent p-0 ${isActiveItem(item.label) ? "text-blue-600" : "text-slate-600"}`}
+                      onClick={() => setIsServicesDropdownOpen(!isServicesDropdownOpen)}
+                    >
+                      <span className="font-medium text-inherit">
+                        {item.label}
+                      </span>
+                      <ChevronDown
+                        size={20}
+                        className={`transition-transform ${isServicesDropdownOpen ? "rotate-180" : ""}`}
+                      />
+                    </button>
+                    {isServicesDropdownOpen && (
+                      <ul className="m-0 ml-4 flex flex-col gap-2 list-none border-l-2 border-slate-200 pl-4 py-2">
+                        {serviceItems.map((service) => (
+                          <li key={service.label}>
+                            <button
+                              type="button"
+                              className={`w-full text-left py-2 text-base font-medium transition-colors border-none bg-transparent ${
+                                selectedServicePath === service.path || (service.path !== "/services" && selectedServicePath.startsWith(`${service.path}/`))
+                                  ? "text-blue-600"
+                                  : "text-slate-600"
+                              }`}
+                              onClick={() => {
+                                setIsMobileMenuOpen(false);
+                                setIsServicesDropdownOpen(false);
+                                navigate(service.path);
+                              }}
+                            >
+                              {service.label}
+                            </button>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                ) : (
+                  <a
+                    href={item.href}
+                    className={`block text-lg font-medium no-underline transition-colors py-2 ${
+                      isActiveItem(item.label) ? "text-blue-600" : "text-slate-600 hover:text-blue-600"
+                    }`}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                )}
+              </li>
+            ))}
+            <li className="mt-2">
+              <a
+                className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 px-7 text-lg font-medium text-white no-underline shadow-[0_8px_20px_rgba(37,99,235,0.38)]"
+                href="/contact"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Get in Touch
+                <span className="flex h-5 w-5 items-center justify-center rounded-full bg-white/20 text-sm">
+                  →
+                </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      )}
     </nav>
   );
 };
