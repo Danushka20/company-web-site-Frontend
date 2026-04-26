@@ -1,26 +1,17 @@
-import React, { useCallback } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useCallback, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
 import smartKodersLogo from "../../assets/company-logo.png";
 import { serviceItems } from "../../data/servicesData";
 import { useDropdownClose } from "../../hooks/useDropdownClose";
 
-interface NavbarProps {
-  selectedService?: string;
-  isServicesDropdownOpen?: boolean;
-  onToggleServicesDropdown?: () => void;
-  onCloseServicesDropdown?: () => void;
-  onSelectService?: (label: string) => void;
-}
-
-const Navbar: React.FC<NavbarProps> = ({
-  selectedService,
-  isServicesDropdownOpen = false,
-  onToggleServicesDropdown,
-  onCloseServicesDropdown,
-  onSelectService,
-}) => {
+const Navbar: React.FC = () => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  const isServicesPage = location.pathname.startsWith("/services");
+  const selectedServicePath = isServicesPage ? location.pathname : "";
+
   const navItems = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
@@ -29,20 +20,13 @@ const Navbar: React.FC<NavbarProps> = ({
     { label: "Contact", href: "/contact" },
     { label: "Services", href: "/services" },
   ];
-  const canUseServicesDropdown =
-    location.pathname === "/services" &&
-    typeof onToggleServicesDropdown === "function" &&
-    typeof onCloseServicesDropdown === "function" &&
-    typeof onSelectService === "function" &&
-    typeof selectedService === "string";
-  const closeServicesDropdown = useCallback(() => {
-    if (canUseServicesDropdown) {
-      onCloseServicesDropdown?.();
-    }
-  }, [canUseServicesDropdown, onCloseServicesDropdown]);
+
+  const handleCloseDropdown = useCallback(() => {
+    setIsServicesDropdownOpen(false);
+  }, []);
   const servicesDropdownRef = useDropdownClose<HTMLLIElement>(
-    canUseServicesDropdown ? isServicesDropdownOpen : false,
-    closeServicesDropdown,
+    isServicesDropdownOpen,
+    handleCloseDropdown,
   );
 
   const isActiveItem = (label: string) => {
@@ -58,7 +42,7 @@ const Navbar: React.FC<NavbarProps> = ({
     }
 
     if (label === "Services") {
-      return location.pathname === "/services";
+      return location.pathname.startsWith("/services");
     }
 
     if (label === "Contact") {
@@ -68,46 +52,54 @@ const Navbar: React.FC<NavbarProps> = ({
     return false;
   };
 
+  const handleServicesTextClick = () => {
+    if (!isServicesPage) {
+      setIsServicesDropdownOpen(true);
+    }
+  };
+
+  const handleServicesIconClick = () => {
+    setIsServicesDropdownOpen((prev) => !prev);
+  };
+
   return (
     <nav
       className="fixed left-1/2 top-5 z-[2200] w-[95%] max-w-[1250px] -translate-x-1/2 rounded-full border border-slate-200/90 bg-[#f2f3f5] px-5 py-3 shadow-[0_10px_30px_rgba(0,0,0,0.18)] backdrop-blur-sm"
       aria-label="Main navigation"
     >
       <div className="flex items-center justify-between gap-4">
-        <a
-          className="inline-flex items-center no-underline"
-          href="/"
-          aria-label="Go to top"
-        >
+        <Link className="inline-flex items-center no-underline" to="/" aria-label="Go to top">
           <img
             className="block h-15 w-auto object-contain md:h-14"
             src={smartKodersLogo}
             alt="SmartKoders"
           />
-        </a>
+        </Link>
 
         <ul className="m-0 hidden list-none items-center justify-center gap-9 p-0 md:flex">
           {navItems.map((item) => {
-            if (item.label === "Services" && canUseServicesDropdown) {
+            if (item.label === "Services") {
               return (
-                <li
-                  key={item.label}
-                  ref={servicesDropdownRef}
-                  className="relative"
-                >
+                <li key={item.label} ref={servicesDropdownRef} className="relative">
                   <div
                     className={`inline-flex items-center gap-1 text-[21px] font-medium leading-none ${
                       isActiveItem(item.label) ? "text-blue-600" : "text-slate-600"
                     }`}
                   >
-                    <span>{item.label}</span>
                     <button
                       type="button"
-                      className="inline-flex items-center justify-center"
+                      className="cursor-pointer border-none bg-transparent p-0 text-[21px] font-medium leading-none text-inherit"
+                      onClick={handleServicesTextClick}
+                    >
+                      {item.label}
+                    </button>
+                    <button
+                      type="button"
+                      className="inline-flex items-center justify-center border-none bg-transparent p-0 text-inherit"
                       aria-label="Toggle services menu"
                       aria-haspopup="menu"
                       aria-expanded={isServicesDropdownOpen}
-                      onClick={() => onToggleServicesDropdown?.()}
+                      onClick={handleServicesIconClick}
                     >
                       <ChevronDown
                         size={17}
@@ -120,13 +112,9 @@ const Navbar: React.FC<NavbarProps> = ({
 
                   {isServicesDropdownOpen ? (
                     <div className="absolute right-0 top-full z-30 mt-6 w-[286px] overflow-hidden rounded-[18px] border border-slate-200 bg-[#f6f7f9] shadow-[0_18px_30px_rgba(9,30,66,0.2)]">
-                      <ul
-                        className="m-0 list-none p-0"
-                        role="menu"
-                        aria-label="Services menu"
-                      >
+                      <ul className="m-0 list-none p-0" role="menu" aria-label="Services menu">
                         {serviceItems.map((service) => {
-                          const isSelected = service.label === selectedService;
+                          const isSelected = service.path === selectedServicePath;
 
                           return (
                             <li key={service.label}>
@@ -138,7 +126,11 @@ const Navbar: React.FC<NavbarProps> = ({
                                     : "text-[#3b4a5e] hover:bg-[#e7ecf4]"
                                 }`}
                                 role="menuitem"
-                                onClick={() => onSelectService?.(service.label)}
+                                aria-current={isSelected ? "page" : undefined}
+                                onClick={() => {
+                                  setIsServicesDropdownOpen(false);
+                                  navigate(service.path);
+                                }}
                               >
                                 {service.label}
                               </button>
@@ -152,36 +144,12 @@ const Navbar: React.FC<NavbarProps> = ({
               );
             }
 
-            if (item.label === "Services") {
-              return (
-                <li key={item.label}>
-                  <a
-                    href={item.href}
-                    className={`inline-flex items-center gap-1 text-[21px] font-medium leading-none no-underline transition-colors duration-200 hover:text-blue-600 ${
-                      isActiveItem(item.label)
-                        ? "text-blue-600"
-                        : "text-slate-600"
-                    }`}
-                  >
-                    <span>{item.label}</span>
-                    <ChevronDown
-                      size={17}
-                      strokeWidth={2.4}
-                      aria-hidden="true"
-                    />
-                  </a>
-                </li>
-              );
-            }
-
             return (
               <li key={item.label}>
                 <a
                   href={item.href}
                   className={`text-[21px] font-medium leading-none no-underline transition-colors duration-200 hover:text-blue-600 ${
-                    isActiveItem(item.label)
-                      ? "text-blue-600"
-                      : "text-slate-600"
+                    isActiveItem(item.label) ? "text-blue-600" : "text-slate-600"
                   }`}
                 >
                   {item.label}

@@ -14,13 +14,44 @@ import {
 
 /* ─── Service Dropdown Items ─── */
 export const serviceItems = [
-  { label: 'All Services', icon: BriefcaseBusiness },
-  { label: "Software Development", icon: Code2 },
-  { label: "IoT Solutions", icon: Radio },
-  { label: "Andon System", icon: Settings },
-  { label: "Andon System - Software", icon: Cpu },
-  { label: "Andon System - Hardware", icon: Wrench },
+  { label: "All Services", icon: BriefcaseBusiness, slug: "", path: "/services" },
+  {
+    label: "Software Development",
+    icon: Code2,
+    slug: "softwareDevelopment",
+    path: "/services/softwareDevelopment",
+  },
+  {
+    label: "IoT Solutions",
+    icon: Radio,
+    slug: "iotSolutions",
+    path: "/services/iotSolutions",
+  },
+  { label: "Andon System", icon: Settings, slug: "andonSystem", path: "/services/andonSystem" },
+  {
+    label: "Andon System - Software",
+    icon: Cpu,
+    slug: "andonSoftware",
+    path: "/services/andonSoftware",
+  },
+  {
+    label: "Andon System - Hardware",
+    icon: Wrench,
+    slug: "andonHardware",
+    path: "/services/andonHardware",
+  },
 ];
+
+export const getServiceItemFromPath = (pathname: string) =>
+  serviceItems.find((item) => item.path === pathname) ?? serviceItems[0];
+
+export const getServiceItemFromSlug = (slug?: string) => {
+  if (!slug) {
+    return serviceItems[0];
+  }
+
+  return serviceItems.find((item) => item.slug === slug) ?? serviceItems[0];
+};
 
 /* ─── Service Stats ─── */
 export const serviceStats = [
