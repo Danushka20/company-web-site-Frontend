@@ -1,33 +1,68 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import smartKodersLogo from '../../assets/company-logo.png';
+import React, { useCallback } from "react";
+import { useLocation } from "react-router-dom";
+import { ChevronDown } from "lucide-react";
+import smartKodersLogo from "../../assets/company-logo.png";
+import { serviceItems } from "../../data/servicesData";
+import { useDropdownClose } from "../../hooks/useDropdownClose";
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  selectedService?: string;
+  isServicesDropdownOpen?: boolean;
+  onToggleServicesDropdown?: () => void;
+  onCloseServicesDropdown?: () => void;
+  onSelectService?: (label: string) => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({
+  selectedService,
+  isServicesDropdownOpen = false,
+  onToggleServicesDropdown,
+  onCloseServicesDropdown,
+  onSelectService,
+}) => {
   const location = useLocation();
   const navItems = [
-    { label: 'Home', href: '/' },
-    { label: 'About', href: '/about' },
-    { label: 'Services', href: '/services' },
-    { label: 'Projects', href: '/#projects' },
-    { label: 'Interns', href: '/#interns' },
-    { label: 'Contact', href: '/contact' },
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Projects", href: "/#projects" },
+    { label: "Interns", href: "/#interns" },
+    { label: "Contact", href: "/contact" },
+    { label: "Services", href: "/services" },
   ];
+  const canUseServicesDropdown =
+    location.pathname === "/services" &&
+    typeof onToggleServicesDropdown === "function" &&
+    typeof onCloseServicesDropdown === "function" &&
+    typeof onSelectService === "function" &&
+    typeof selectedService === "string";
+  const closeServicesDropdown = useCallback(() => {
+    if (canUseServicesDropdown) {
+      onCloseServicesDropdown?.();
+    }
+  }, [canUseServicesDropdown, onCloseServicesDropdown]);
+  const servicesDropdownRef = useDropdownClose<HTMLLIElement>(
+    canUseServicesDropdown ? isServicesDropdownOpen : false,
+    closeServicesDropdown,
+  );
 
   const isActiveItem = (label: string) => {
-    if (label === 'About') {
-      return location.pathname === '/about';
+    if (label === "About") {
+      return location.pathname === "/about";
     }
 
-    if (label === 'Home') {
-      return location.pathname === '/' && (location.hash === '' || location.hash === '#home');
+    if (label === "Home") {
+      return (
+        location.pathname === "/" &&
+        (location.hash === "" || location.hash === "#home")
+      );
     }
 
-    if (label === 'Services') {
-      return location.pathname === '/services';
+    if (label === "Services") {
+      return location.pathname === "/services";
     }
 
-    if (label === 'Contact') {
-      return location.pathname === '/contact';
+    if (label === "Contact") {
+      return location.pathname === "/contact";
     }
 
     return false;
@@ -39,7 +74,11 @@ const Navbar: React.FC = () => {
       aria-label="Main navigation"
     >
       <div className="flex items-center justify-between gap-4">
-        <a className="inline-flex items-center no-underline" href="/" aria-label="Go to top">
+        <a
+          className="inline-flex items-center no-underline"
+          href="/"
+          aria-label="Go to top"
+        >
           <img
             className="block h-15 w-auto object-contain md:h-14"
             src={smartKodersLogo}
@@ -48,18 +87,108 @@ const Navbar: React.FC = () => {
         </a>
 
         <ul className="m-0 hidden list-none items-center justify-center gap-9 p-0 md:flex">
-          {navItems.map((item) => (
-            <li key={item.label}>
-              <a
-                href={item.href}
-                className={`text-[21px] font-medium leading-none no-underline transition-colors duration-200 hover:text-blue-600 ${
-                  isActiveItem(item.label) ? 'text-blue-600' : 'text-slate-600'
-                }`}
-              >
-                {item.label}
-              </a>
-            </li>
-          ))}
+          {navItems.map((item) => {
+            if (item.label === "Services" && canUseServicesDropdown) {
+              return (
+                <li
+                  key={item.label}
+                  ref={servicesDropdownRef}
+                  className="relative"
+                >
+                  <div
+                    className={`inline-flex items-center gap-1 text-[21px] font-medium leading-none ${
+                      isActiveItem(item.label) ? "text-blue-600" : "text-slate-600"
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    <button
+                      type="button"
+                      className="inline-flex items-center justify-center"
+                      aria-label="Toggle services menu"
+                      aria-haspopup="menu"
+                      aria-expanded={isServicesDropdownOpen}
+                      onClick={() => onToggleServicesDropdown?.()}
+                    >
+                      <ChevronDown
+                        size={17}
+                        strokeWidth={2.4}
+                        className={`transition-transform ${isServicesDropdownOpen ? "rotate-180" : ""}`}
+                        aria-hidden="true"
+                      />
+                    </button>
+                  </div>
+
+                  {isServicesDropdownOpen ? (
+                    <div className="absolute right-0 top-full z-30 mt-6 w-[286px] overflow-hidden rounded-[18px] border border-slate-200 bg-[#f6f7f9] shadow-[0_18px_30px_rgba(9,30,66,0.2)]">
+                      <ul
+                        className="m-0 list-none p-0"
+                        role="menu"
+                        aria-label="Services menu"
+                      >
+                        {serviceItems.map((service) => {
+                          const isSelected = service.label === selectedService;
+
+                          return (
+                            <li key={service.label}>
+                              <button
+                                type="button"
+                                className={`w-full px-6 py-4 text-left text-[1.02rem] font-medium transition-colors ${
+                                  isSelected
+                                    ? "bg-[#dfe5ef] text-[#2563eb]"
+                                    : "text-[#3b4a5e] hover:bg-[#e7ecf4]"
+                                }`}
+                                role="menuitem"
+                                onClick={() => onSelectService?.(service.label)}
+                              >
+                                {service.label}
+                              </button>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  ) : null}
+                </li>
+              );
+            }
+
+            if (item.label === "Services") {
+              return (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    className={`inline-flex items-center gap-1 text-[21px] font-medium leading-none no-underline transition-colors duration-200 hover:text-blue-600 ${
+                      isActiveItem(item.label)
+                        ? "text-blue-600"
+                        : "text-slate-600"
+                    }`}
+                  >
+                    <span>{item.label}</span>
+                    <ChevronDown
+                      size={17}
+                      strokeWidth={2.4}
+                      aria-hidden="true"
+                    />
+                  </a>
+                </li>
+              );
+            }
+
+            return (
+              <li key={item.label}>
+                <a
+                  href={item.href}
+                  className={`text-[21px] font-medium leading-none no-underline transition-colors duration-200 hover:text-blue-600 ${
+                    isActiveItem(item.label)
+                      ? "text-blue-600"
+                      : "text-slate-600"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              </li>
+            );
+          })}
         </ul>
 
         <a
