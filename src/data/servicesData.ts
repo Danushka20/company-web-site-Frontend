@@ -1,0 +1,83 @@
+import {
+  BriefcaseBusiness,
+  Clock3,
+  Code2,
+  Cpu,
+  Headset,
+  Heart,
+  Radio,
+  Settings,
+  Smartphone,
+  Users,
+  Wrench,
+} from 'lucide-react';
+
+/* ─── Service Dropdown Items ─── */
+export const serviceItems = [
+  { label: 'All Services Overview', icon: BriefcaseBusiness },
+  { label: 'Software Development', icon: Code2 },
+  { label: 'IoT Solutions', icon: Radio },
+  { label: 'Androit System', icon: Settings },
+  { label: 'Androit System - Software', icon: Cpu },
+  { label: 'Androit System - Hardware', icon: Wrench },
+];
+
+/* ─── Service Stats ─── */
+export const serviceStats = [
+  {
+    icon: Users,
+    value: '50+',
+    title: 'MEMBERS OF STAFF',
+    description:
+      'Expert professionals dedicated to delivering innovative IoT and automation solutions.',
+  },
+  {
+    icon: BriefcaseBusiness,
+    value: '600+',
+    title: 'COMPLETED PROJECTS',
+    description:
+      'Diverse projects across various industries showcasing our expertise and commitment.',
+  },
+  {
+    icon: Heart,
+    value: '506+',
+    title: 'HAPPY CUSTOMERS',
+    description:
+      'Building lasting relationships through exceptional service and support.',
+  },
+  {
+    icon: Clock3,
+    value: '20+',
+    title: 'YEARS EXPERIENCE',
+    description:
+      'Two decades of industry experience driving innovation and excellence.',
+  },
+];
+
+/* ─── What We Do Items ─── */
+export const whatWeDoItems = [
+  {
+    icon: Radio,
+    title: 'IoT Development',
+    description:
+      'End-to-end IoT ecosystems connecting physical assets to the digital cloud for real-time monitoring and automation.',
+  },
+  {
+    icon: Cpu,
+    title: 'Software Development',
+    description:
+      'Custom software architectures designed for scalability, security, and seamless integration with existing workflows.',
+  },
+  {
+    icon: Smartphone,
+    title: 'Mobile App Development',
+    description:
+      "Intuitive, high-performance mobile applications that extend your business reach to every user's fingertips.",
+  },
+  {
+    icon: Headset,
+    title: 'Support & Maintenance',
+    description:
+      'Provide 24/7 global support and technical maintenance services to ensure your systems run smoothly and efficiently.',
+  },
+];
