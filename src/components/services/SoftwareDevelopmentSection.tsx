@@ -127,7 +127,10 @@ const SoftwareDevelopmentSection: React.FC = () => {
             </div>
           </div>
 
-          <ServiceProductsStrip label="View Our Software Products" />
+          <ServiceProductsStrip
+            label="View Our Software Products"
+            href="/services/softwareDevelopment/products"
+          />
 
           {/* CTA */}
           <div className="mt-14 text-center">

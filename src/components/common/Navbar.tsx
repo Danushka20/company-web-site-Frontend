@@ -114,7 +114,10 @@ const Navbar: React.FC = () => {
                     <div className="absolute right-0 top-full z-30 mt-6 w-[286px] overflow-hidden rounded-[18px] border border-slate-200 bg-[#f6f7f9] shadow-[0_18px_30px_rgba(9,30,66,0.2)]">
                       <ul className="m-0 list-none p-0" role="menu" aria-label="Services menu">
                         {serviceItems.map((service) => {
-                          const isSelected = service.path === selectedServicePath;
+                          const isSelected =
+                            selectedServicePath === service.path ||
+                            (service.path !== "/services" &&
+                              selectedServicePath.startsWith(`${service.path}/`));
 
                           return (
                             <li key={service.label}>

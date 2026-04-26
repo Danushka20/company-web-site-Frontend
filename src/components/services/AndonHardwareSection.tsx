@@ -116,7 +116,10 @@ const AndonHardwareSection: React.FC = () => {
             </div>
           </div>
 
-          <ServiceProductsStrip label="View Our Andon Hardware" />
+          <ServiceProductsStrip
+            label="View Our Andon Hardware"
+            href="/services/andonHardware/products"
+          />
 
           <div className="mt-14 text-center">
             <a
