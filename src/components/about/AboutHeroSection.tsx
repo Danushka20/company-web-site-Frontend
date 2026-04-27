@@ -1,6 +1,5 @@
 import React from 'react';
 import { House } from 'lucide-react';
-import Navbar from '../common/Navbar';
 
 const AboutHeroSection: React.FC = () => {
   return (

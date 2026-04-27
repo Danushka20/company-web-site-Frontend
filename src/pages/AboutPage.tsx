@@ -6,7 +6,7 @@ import VisionMissionSection from '../components/about/VisionMissionSection';
 import TechnologySection from '../components/about/TechnologySection';
 import MilestonesSection from '../components/about/MilestonesSection';
 import ImpactSection from '../components/about/ImpactSection';
-import CoreDnaSection from '../components/about/CoreDnaSection';
+import ExperienceSection from '../components/about/ExperienceSection';
 import TeamSection from '../components/about/TeamSection';
 import { useScrollToTop } from '../hooks/useScrollToTop';
 
@@ -17,12 +17,12 @@ const AboutPage: React.FC = () => {
     <main className="min-h-screen bg-[#f4f5f7] px-4 pb-0 pt-5 text-[#24364d] sm:px-6 lg:px-10">
       <Navbar />
       <AboutHeroSection />
+      <TeamSection />
       <VisionMissionSection />
       <TechnologySection />
       <MilestonesSection />
       <ImpactSection />
-      <CoreDnaSection />
-      <TeamSection />
+      <ExperienceSection />
 
       <div className="about-footer-soft -mx-4 sm:-mx-6 lg:-mx-10">
         <Footer />
