@@ -4,7 +4,7 @@ import heroImage from "../../assets/hero.png";
 
 const TeamSection: React.FC = () => {
   return (
-    <div className="-mx-4 bg-white px-4 sm:-mx-6 sm:px-6 lg:-mx-10 lg:px-10">
+    <div className="-mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-10 lg:px-10">
       <section className="mx-auto mt-20 w-full max-w-[1080px] pb-20 sm:mt-24 sm:pb-24">
         <div className="rounded-[28px] border border-[#dbe5f8] bg-gradient-to-br from-[#f8fbff] via-[#f5f8ff] to-[#edf3ff] p-5 shadow-[0_18px_50px_rgba(31,68,132,0.12)] sm:p-7 lg:p-10">
           <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[340px_1fr] lg:gap-10">

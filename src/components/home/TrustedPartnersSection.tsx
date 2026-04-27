@@ -28,8 +28,8 @@ function injectStyles() {
 
     /* ── Shimmer sweep across partner cards ── */
     @keyframes shimmerSweep {
-      0%   { background-position: -200% center; }
-      100% { background-position:  200% center; }
+      0%   { left: -150%; }
+      100% { left: 150%; }
     }
 
     /* Base hidden states */
@@ -50,37 +50,33 @@ function injectStyles() {
 
     /* Card hover – shimmer + lift */
     .trusted-card-inner {
-      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1),
-                  box-shadow 0.3s ease,
-                  border-color 0.25s ease;
-      background-size: 200% auto;
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
       position: relative;
       overflow: hidden;
     }
-    .trusted-card-inner::after {
+    .trusted-card-inner::before {
       content: '';
       position: absolute;
-      inset: 0;
-      border-radius: inherit;
+      top: 0;
+      left: -150%;
+      width: 100%;
+      height: 100%;
       background: linear-gradient(
-        105deg,
-        transparent 40%,
-        rgba(255,255,255,0.22) 50%,
-        transparent 60%
+        to right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.6) 50%,
+        rgba(255, 255, 255, 0) 100%
       );
-      background-size: 200% auto;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      pointer-events: none;
+      transform: skewX(-25deg);
+      z-index: 1;
     }
     .trusted-card-inner:hover {
-      transform: translateY(-5px) scale(1.03);
-      box-shadow: 0 10px 30px rgba(46,102,233,0.14);
-      border-color: #2e66e9 !important;
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px -10px rgba(46, 102, 233, 0.15), 0 0 20px rgba(46, 102, 233, 0.05);
+      border-color: rgba(46, 102, 233, 0.3) !important;
     }
-    .trusted-card-inner:hover::after {
-      opacity: 1;
-      animation: shimmerSweep 0.7s linear forwards;
+    .trusted-card-inner:hover::before {
+      animation: shimmerSweep 1.2s ease-in-out infinite;
     }
   `;
   document.head.appendChild(style);
@@ -142,12 +138,15 @@ const TrustedPartnersSection: React.FC = () => {
           {trustedPartners.map((partner, index) => (
             <div
               key={partner}
-              className="trusted-card"
+              className="trusted-card group"
               role="listitem"
               style={{ animationDelay: `${0.06 + index * 0.07}s` }}
             >
-              <article className="trusted-card-inner flex min-h-[70px] items-center justify-center rounded-xl border border-[#d8dce3] bg-[#e3e5ea] text-[0.92rem] text-[#8193ad] max-sm:min-h-[62px]">
-                {partner}
+              <article className="trusted-card-inner flex min-h-[85px] w-full items-center justify-center rounded-2xl border border-white/60 bg-white/80 p-5 text-[0.9rem] font-bold uppercase tracking-[0.12em] text-slate-400 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.06)] backdrop-blur-md transition-all duration-500 hover:text-[#2e66e9] max-sm:min-h-[70px]">
+                <span className="relative z-10 flex items-center gap-3">
+                  <span className="h-1.5 w-1.5 rounded-full bg-slate-300 transition-colors duration-500 group-hover:bg-[#2e66e9]"></span>
+                  {partner}
+                </span>
               </article>
             </div>
           ))}
