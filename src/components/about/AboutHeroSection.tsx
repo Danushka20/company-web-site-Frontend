@@ -1,5 +1,5 @@
-import React from 'react';
-import { House } from 'lucide-react';
+import React from "react";
+import { House } from "lucide-react";
 
 const AboutHeroSection: React.FC = () => {
   return (
@@ -19,22 +19,31 @@ const AboutHeroSection: React.FC = () => {
           </h1>
 
           <p className="mx-auto mt-10 max-w-[980px] text-[clamp(1.04rem,1.35vw,2rem)] leading-[1.62] text-[#314962]">
-            Founded in 2006, Sky Smart Technology has emerged as a powerhouse in industrial
-            automation and IoT research. We don't just build sensors; we build the nervous system
-            of modern industry. Our mission is to transform raw factory floor data into actionable
-            intelligence, scaling across South Asia and beyond.
+            Founded in 2006, Sky Smart Technology has emerged as a powerhouse in
+            industrial automation and IoT research. We don't just build sensors;
+            we build the nervous system of modern industry. Our mission is to
+            transform raw factory floor data into actionable intelligence,
+            scaling across South Asia and beyond.
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-5 mt-16 md:grid-cols-2 md:gap-6">
           <article className="rounded-2xl border border-blue-100 bg-blue-100/60 px-6 py-7 text-center text-[#1f5be5]">
-            <p className="m-0 text-[clamp(2.1rem,3.7vw,3.15rem)] leading-none">2006</p>
-            <p className="mt-3 text-[clamp(0.94rem,1vw,1.1rem)] text-[#2f435c]">Core Initialization</p>
+            <p className="m-0 text-[clamp(2.1rem,3.7vw,3.15rem)] leading-none">
+              2006
+            </p>
+            <p className="mt-3 text-[clamp(0.94rem,1vw,1.1rem)] text-[#2f435c]">
+              Core Initialization
+            </p>
           </article>
 
           <article className="rounded-2xl border border-blue-100 bg-blue-100/60 px-6 py-7 text-center text-[#1f5be5]">
-            <p className="m-0 text-[clamp(2.1rem,3.7vw,3.15rem)] leading-none">0K+</p>
-            <p className="mt-3 text-[clamp(0.94rem,1vw,1.1rem)] text-[#2f435c]">Active Nodes</p>
+            <p className="m-0 text-[clamp(2.1rem,3.7vw,3.15rem)] leading-none">
+              0K+
+            </p>
+            <p className="mt-3 text-[clamp(0.94rem,1vw,1.1rem)] text-[#2f435c]">
+              Active Nodes
+            </p>
           </article>
         </div>
 

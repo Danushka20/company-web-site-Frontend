@@ -1,12 +1,12 @@
-import React, { useEffect, useRef } from 'react';
-import { journeyMilestones } from '../../data/homeData';
+import React, { useEffect, useRef } from "react";
+import { journeyMilestones } from "../../data/homeData";
 
 /* ── Inline keyframe styles injected once ── */
-const STYLE_ID = 'journey-animation-styles';
+const STYLE_ID = "journey-animation-styles";
 
 function injectStyles() {
   if (document.getElementById(STYLE_ID)) return;
-  const style = document.createElement('style');
+  const style = document.createElement("style");
   style.id = STYLE_ID;
   style.textContent = `
     /* ── Title drop-in ── */
@@ -84,9 +84,9 @@ function injectStyles() {
 
 /* ─────────────────────────────────────────────── */
 
-const YEAR_COL   = 150;   /* px – year column width (desktop) */
-const DOT_SIZE   = 12;    /* px – connector dot diameter      */
-const LINE_LEFT  = YEAR_COL + 24; /* gap between year column and card */
+const YEAR_COL = 150; /* px – year column width (desktop) */
+const DOT_SIZE = 12; /* px – connector dot diameter      */
+const LINE_LEFT = YEAR_COL + 24; /* gap between year column and card */
 
 const JourneySection: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -95,7 +95,7 @@ const JourneySection: React.FC = () => {
     injectStyles();
 
     const targets = sectionRef.current?.querySelectorAll<HTMLElement>(
-      '.journey-title, .journey-year, .journey-card, .journey-line',
+      ".journey-title, .journey-year, .journey-card, .journey-line",
     );
     if (!targets) return;
 
@@ -103,12 +103,12 @@ const JourneySection: React.FC = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            (entry.target as HTMLElement).classList.add('visible');
+            (entry.target as HTMLElement).classList.add("visible");
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.12, rootMargin: '0px 0px -50px 0px' },
+      { threshold: 0.12, rootMargin: "0px 0px -50px 0px" },
     );
 
     targets.forEach((el) => observer.observe(el));
@@ -122,7 +122,6 @@ const JourneySection: React.FC = () => {
       aria-label="Our Journey"
     >
       <div className="mx-auto w-full max-w-[1080px]">
-
         {/* ── Section Title ── */}
         <h2 className="journey-title m-0 text-center font-['Trebuchet_MS','Segoe_UI',sans-serif] text-[clamp(2rem,4vw,3.5rem)] leading-[1.05] tracking-[0.05em] text-[#2d67ea]">
           OUR JOURNEY
@@ -144,7 +143,7 @@ const JourneySection: React.FC = () => {
               className="h-full w-full rounded-full"
               style={{
                 background:
-                  'linear-gradient(to bottom, #2d67ea 0%, rgba(45,103,234,0.35) 80%, transparent 100%)',
+                  "linear-gradient(to bottom, #2d67ea 0%, rgba(45,103,234,0.35) 80%, transparent 100%)",
               }}
             />
           </div>
@@ -165,7 +164,7 @@ const JourneySection: React.FC = () => {
                     style={{
                       width: `${YEAR_COL}px`,
                       animationDelay: `${delay}s`,
-                      paddingRight: '14px',
+                      paddingRight: "14px",
                     }}
                   >
                     <p className="m-0 text-[clamp(1.5rem,2vw,2rem)] font-semibold leading-[1.1] text-[#2e66e9]">
@@ -173,7 +172,7 @@ const JourneySection: React.FC = () => {
                     </p>
                     {item.note && (
                       <p className="mt-1.5 mb-0">
-                        {item.note.split('\n').map((line) => (
+                        {item.note.split("\n").map((line) => (
                           <span
                             className="block text-[0.6rem] leading-[1.3] tracking-[0.04em] text-[#2c7f4f]"
                             key={line}
@@ -190,8 +189,8 @@ const JourneySection: React.FC = () => {
                       style={{
                         width: `${DOT_SIZE}px`,
                         height: `${DOT_SIZE}px`,
-                        right: `${-DOT_SIZE / 2 - 15}px`,   /* centre on the spine */
-                        border: '2.5px solid #e6e9ee',
+                        right: `${-DOT_SIZE / 2 - 15}px` /* centre on the spine */,
+                        border: "2.5px solid #e6e9ee",
                         zIndex: 2,
                       }}
                       aria-hidden="true"

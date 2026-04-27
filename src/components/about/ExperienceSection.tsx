@@ -1,27 +1,29 @@
-import React from 'react';
-import { Briefcase, Users, Trophy, Zap } from 'lucide-react';
+import React from "react";
+import { Briefcase, Users, Trophy, Zap } from "lucide-react";
 
 const ExperienceSection: React.FC = () => {
   const experiences = [
     {
       icon: Briefcase,
-      title: '50+ Projects',
-      description: 'Successfully delivered across software, electronics, and IoT domains.',
+      title: "50+ Projects",
+      description:
+        "Successfully delivered across software, electronics, and IoT domains.",
     },
     {
       icon: Users,
-      title: '100+ Team Members',
-      description: 'Talented engineers and specialists committed to excellence.',
+      title: "100+ Team Members",
+      description:
+        "Talented engineers and specialists committed to excellence.",
     },
     {
       icon: Trophy,
-      title: '10+ Awards',
-      description: 'Recognition for innovation and industry leadership.',
+      title: "10+ Awards",
+      description: "Recognition for innovation and industry leadership.",
     },
     {
       icon: Zap,
-      title: '5+ Countries',
-      description: 'Global presence with local expertise in key markets.',
+      title: "5+ Countries",
+      description: "Global presence with local expertise in key markets.",
     },
   ];
 
@@ -36,7 +38,7 @@ const ExperienceSection: React.FC = () => {
         </p>
       </div>
 
-      <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-7">
+      <div className="grid grid-cols-1 gap-6 mt-10 md:grid-cols-2 md:gap-7">
         {experiences.map((item) => {
           const Icon = item.icon;
           return (

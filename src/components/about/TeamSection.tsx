@@ -1,6 +1,6 @@
-import React from 'react';
-import { bossProfile } from '../../data/aboutData';
-import heroImage from '../../assets/hero.png';
+import React from "react";
+import { bossProfile } from "../../data/aboutData";
+import heroImage from "../../assets/hero.png";
 
 const TeamSection: React.FC = () => {
   return (
@@ -22,11 +22,15 @@ const TeamSection: React.FC = () => {
               />
 
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#071429] via-[#071429d1] to-transparent px-5 pb-5 pt-10 text-white sm:px-6 sm:pb-6">
-                <p className="m-0 text-sm uppercase tracking-[0.16em] text-[#a9c8ff]">Leadership</p>
+                <p className="m-0 text-sm uppercase tracking-[0.16em] text-[#a9c8ff]">
+                  Leadership
+                </p>
                 <h3 className="mt-2 text-[clamp(1.25rem,2vw,1.7rem)] font-semibold leading-[1.2]">
                   {bossProfile.name}
                 </h3>
-                <p className="mt-2 text-sm text-[#d6e6ff] sm:text-[0.95rem]">{bossProfile.role}</p>
+                <p className="mt-2 text-sm text-[#d6e6ff] sm:text-[0.95rem]">
+                  {bossProfile.role}
+                </p>
               </div>
             </div>
 
@@ -56,9 +60,10 @@ const TeamSection: React.FC = () => {
             </h2>
 
             <p className="mt-8 max-w-[620px] text-[clamp(1.03rem,1.1vw,1.2rem)] leading-[1.75] text-[#2f435c]">
-              Our diverse team of engineers and industry specialists is united by a single mission:
-              to render the impossible, inevitable. We combine deep domain expertise with advanced
-              software and intelligent technologies to solve complex industrial challenges.
+              Our diverse team of engineers and industry specialists is united
+              by a single mission: to render the impossible, inevitable. We
+              combine deep domain expertise with advanced software and
+              intelligent technologies to solve complex industrial challenges.
             </p>
           </div>
 
