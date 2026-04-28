@@ -9,6 +9,8 @@ import SoftwareDevelopmentProductsPage from "../pages/SoftwareDevelopmentProduct
 import ContactPage from "../pages/ContactPage.tsx";
 import ProjectsPage from "../pages/ProjectsPage.tsx";
 import ProjectDetailsPage from "../pages/ProjectDetailsPage.tsx";
+import InternsPage from "../pages/InternsPage.tsx";
+import InternDetailsPage from "../pages/InternDetailsPage.tsx";
 import DashboardPage from "../pages/dashboard/DashboardPage.tsx";
 import UserListPage from "../pages/users/UserListPage.tsx";
 import DashboardLayout from "../layouts/DashboardLayout.tsx";
@@ -24,6 +26,8 @@ const AppRoutes: React.FC = () => {
       <Route path="/about" element={<AboutPage />} />
       <Route path="/projects" element={<ProjectsPage />} />
       <Route path="/projects/:projectId" element={<ProjectDetailsPage />} />
+      <Route path="/interns" element={<InternsPage />} />
+      <Route path="/interns/:internId" element={<InternDetailsPage />} />
       <Route path="/services" element={<ServicesPage />} />
       <Route path="/services/:serviceSlug" element={<ServicesPage />} />
       <Route
