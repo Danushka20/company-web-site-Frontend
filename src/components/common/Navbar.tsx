@@ -73,7 +73,11 @@ const Navbar: React.FC = () => {
       aria-label="Main navigation"
     >
       <div className="flex items-center justify-between gap-4">
-        <Link className="inline-flex items-center no-underline" to="/" aria-label="Go to top">
+        <Link
+          className="inline-flex items-center no-underline"
+          to="/"
+          aria-label="Go to top"
+        >
           <img
             className="block h-10 w-auto object-contain md:h-12 lg:h-14"
             src={smartKodersLogo}
@@ -85,10 +89,16 @@ const Navbar: React.FC = () => {
           {navItems.map((item) => {
             if (item.label === "Services") {
               return (
-                <li key={item.label} ref={servicesDropdownRef} className="relative">
+                <li
+                  key={item.label}
+                  ref={servicesDropdownRef}
+                  className="relative"
+                >
                   <div
                     className={`inline-flex items-center gap-1 text-[21px] font-medium leading-none ${
-                      isActiveItem(item.label) ? "text-blue-600" : "text-slate-600"
+                      isActiveItem(item.label)
+                        ? "text-blue-600"
+                        : "text-slate-600"
                     }`}
                   >
                     <button
@@ -117,12 +127,18 @@ const Navbar: React.FC = () => {
 
                   {isServicesDropdownOpen ? (
                     <div className="absolute right-0 top-full z-30 mt-6 w-[286px] overflow-hidden rounded-[18px] border border-slate-200 bg-[#f6f7f9] shadow-[0_18px_30px_rgba(9,30,66,0.2)]">
-                      <ul className="m-0 list-none p-0" role="menu" aria-label="Services menu">
+                      <ul
+                        className="m-0 list-none p-0"
+                        role="menu"
+                        aria-label="Services menu"
+                      >
                         {serviceItems.map((service) => {
                           const isSelected =
                             selectedServicePath === service.path ||
                             (service.path !== "/services" &&
-                              selectedServicePath.startsWith(`${service.path}/`));
+                              selectedServicePath.startsWith(
+                                `${service.path}/`,
+                              ));
 
                           return (
                             <li key={service.label}>
@@ -157,7 +173,9 @@ const Navbar: React.FC = () => {
                 <a
                   href={item.href}
                   className={`text-[21px] font-medium leading-none no-underline transition-colors duration-200 hover:text-blue-600 ${
-                    isActiveItem(item.label) ? "text-blue-600" : "text-slate-600"
+                    isActiveItem(item.label)
+                      ? "text-blue-600"
+                      : "text-slate-600"
                   }`}
                 >
                   {item.label}
@@ -198,9 +216,11 @@ const Navbar: React.FC = () => {
               <li key={item.label}>
                 {item.label === "Services" ? (
                   <div className="flex flex-col gap-2">
-                    <button 
+                    <button
                       className={`flex w-full items-center justify-between text-lg font-medium border-none bg-transparent p-0 ${isActiveItem(item.label) ? "text-blue-600" : "text-slate-600"}`}
-                      onClick={() => setIsServicesDropdownOpen(!isServicesDropdownOpen)}
+                      onClick={() =>
+                        setIsServicesDropdownOpen(!isServicesDropdownOpen)
+                      }
                     >
                       <span className="font-medium text-inherit">
                         {item.label}
@@ -217,7 +237,11 @@ const Navbar: React.FC = () => {
                             <button
                               type="button"
                               className={`w-full text-left py-2 text-base font-medium transition-colors border-none bg-transparent ${
-                                selectedServicePath === service.path || (service.path !== "/services" && selectedServicePath.startsWith(`${service.path}/`))
+                                selectedServicePath === service.path ||
+                                (service.path !== "/services" &&
+                                  selectedServicePath.startsWith(
+                                    `${service.path}/`,
+                                  ))
                                   ? "text-blue-600"
                                   : "text-slate-600"
                               }`}
@@ -238,7 +262,9 @@ const Navbar: React.FC = () => {
                   <a
                     href={item.href}
                     className={`block text-lg font-medium no-underline transition-colors py-2 ${
-                      isActiveItem(item.label) ? "text-blue-600" : "text-slate-600 hover:text-blue-600"
+                      isActiveItem(item.label)
+                        ? "text-blue-600"
+                        : "text-slate-600 hover:text-blue-600"
                     }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >

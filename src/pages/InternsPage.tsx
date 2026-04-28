@@ -1,14 +1,14 @@
-import React, { useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { House, Search, SlidersHorizontal } from 'lucide-react';
-import Navbar from '../components/common/Navbar';
-import Footer from '../components/common/Footer';
-import { useScrollToTop } from '../hooks/useScrollToTop';
-import interns from '../data/internsData';
+import React, { useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { House, Search, SlidersHorizontal } from "lucide-react";
+import Navbar from "../components/common/Navbar";
+import Footer from "../components/common/Footer";
+import { useScrollToTop } from "../hooks/useScrollToTop";
+import interns from "../data/internsData";
 
 const InternsPage: React.FC = () => {
   useScrollToTop();
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
 
   const filteredInterns = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
@@ -23,9 +23,9 @@ const InternsPage: React.FC = () => {
         intern.institute,
         intern.academy,
         intern.track,
-        intern.skills.join(' '),
+        intern.skills.join(" "),
       ]
-        .join(' ')
+        .join(" ")
         .toLowerCase();
 
       return haystack.includes(normalizedQuery);
@@ -99,7 +99,8 @@ const InternsPage: React.FC = () => {
           <div className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             {filteredInterns.map((intern) => {
               const visibleSkills = intern.skills.slice(0, 3);
-              const extraSkillCount = intern.skills.length - visibleSkills.length;
+              const extraSkillCount =
+                intern.skills.length - visibleSkills.length;
 
               return (
                 <article
@@ -128,7 +129,9 @@ const InternsPage: React.FC = () => {
                     <p className="text-[0.85rem] text-[#5b6b80]">
                       {intern.institute}
                     </p>
-                    <p className="mb-3 text-[0.85rem] text-[#5b6b80]">{intern.academy}</p>
+                    <p className="mb-3 text-[0.85rem] text-[#5b6b80]">
+                      {intern.academy}
+                    </p>
 
                     <div className="mb-4 text-[0.8rem] text-[#6b7a8f]">
                       {intern.duration} • {intern.track}

@@ -1,10 +1,10 @@
-import React from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
-import Navbar from '../components/common/Navbar';
-import Footer from '../components/common/Footer';
-import { useScrollToTop } from '../hooks/useScrollToTop';
-import interns from '../data/internsData';
+import React from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
+import Navbar from "../components/common/Navbar";
+import Footer from "../components/common/Footer";
+import { useScrollToTop } from "../hooks/useScrollToTop";
+import interns from "../data/internsData";
 
 const InternDetailsPage: React.FC = () => {
   useScrollToTop();
@@ -19,7 +19,7 @@ const InternDetailsPage: React.FC = () => {
         <div className="mx-auto max-w-[1080px] py-20 text-center">
           <h1 className="text-2xl font-bold">Intern not found</h1>
           <button
-            onClick={() => navigate('/interns')}
+            onClick={() => navigate("/interns")}
             className="mt-4 text-blue-500 hover:text-blue-600"
           >
             ← Back to Our Interns
@@ -37,7 +37,7 @@ const InternDetailsPage: React.FC = () => {
       <div className="-mx-4 bg-white px-4 sm:-mx-6 sm:px-6 lg:-mx-10 lg:px-10">
         <section className="mx-auto w-full max-w-[1080px] pt-8 pb-8">
           <button
-            onClick={() => navigate('/interns')}
+            onClick={() => navigate("/interns")}
             className="inline-flex items-center gap-2 text-[#255ddf] hover:text-blue-700 font-medium"
           >
             <ArrowLeft size={18} />
@@ -84,7 +84,9 @@ const InternDetailsPage: React.FC = () => {
                 <p className="text-[0.9rem] font-medium text-[#07102a]">
                   {intern.institute}
                 </p>
-                <p className="text-[0.85rem] text-[#5b6b80]">{intern.academy}</p>
+                <p className="text-[0.85rem] text-[#5b6b80]">
+                  {intern.academy}
+                </p>
               </div>
 
               <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_8px_22px_rgba(20,35,58,0.08)]">
@@ -107,27 +109,35 @@ const InternDetailsPage: React.FC = () => {
                 <h3 className="mb-2 text-sm font-semibold uppercase tracking-[0.12em] text-[#2f65e8]">
                   Department
                 </h3>
-                <p className="text-[0.9rem] text-[#5b6b80]">{intern.department}</p>
+                <p className="text-[0.9rem] text-[#5b6b80]">
+                  {intern.department}
+                </p>
               </div>
 
               <div className="rounded-2xl border border-slate-200/80 bg-white p-5 shadow-[0_8px_22px_rgba(20,35,58,0.08)]">
                 <h3 className="mb-2 text-sm font-semibold uppercase tracking-[0.12em] text-[#2f65e8]">
                   Duration
                 </h3>
-                <p className="text-[0.9rem] text-[#5b6b80]">{intern.duration}</p>
+                <p className="text-[0.9rem] text-[#5b6b80]">
+                  {intern.duration}
+                </p>
               </div>
             </aside>
 
             <div className="space-y-6">
               <section className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_8px_22px_rgba(20,35,58,0.08)]">
-                <h2 className="mb-3 text-lg font-semibold text-[#07102a]">About {intern.name}</h2>
+                <h2 className="mb-3 text-lg font-semibold text-[#07102a]">
+                  About {intern.name}
+                </h2>
                 <p className="text-[0.95rem] leading-relaxed text-[#5b6b80]">
                   {intern.about}
                 </p>
               </section>
 
               <section className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_8px_22px_rgba(20,35,58,0.08)]">
-                <h2 className="mb-3 text-lg font-semibold text-[#07102a]">Projects Worked On</h2>
+                <h2 className="mb-3 text-lg font-semibold text-[#07102a]">
+                  Projects Worked On
+                </h2>
                 <ul className="space-y-2 text-[0.95rem] text-[#5b6b80]">
                   {intern.projectsWorkedOn.map((item) => (
                     <li key={item} className="flex gap-2">
@@ -139,7 +149,9 @@ const InternDetailsPage: React.FC = () => {
               </section>
 
               <section className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_8px_22px_rgba(20,35,58,0.08)]">
-                <h2 className="mb-3 text-lg font-semibold text-[#07102a]">Key Responsibilities</h2>
+                <h2 className="mb-3 text-lg font-semibold text-[#07102a]">
+                  Key Responsibilities
+                </h2>
                 <ul className="space-y-2 text-[0.95rem] text-[#5b6b80]">
                   {intern.responsibilities.map((item) => (
                     <li key={item} className="flex gap-2">
@@ -151,14 +163,18 @@ const InternDetailsPage: React.FC = () => {
               </section>
 
               <section className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_8px_22px_rgba(20,35,58,0.08)]">
-                <h2 className="mb-3 text-lg font-semibold text-[#07102a]">Achievements & Impact</h2>
+                <h2 className="mb-3 text-lg font-semibold text-[#07102a]">
+                  Achievements & Impact
+                </h2>
                 <p className="text-[0.95rem] leading-relaxed text-[#5b6b80]">
                   {intern.achievements}
                 </p>
               </section>
 
               <section className="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-[0_8px_22px_rgba(20,35,58,0.08)]">
-                <h2 className="mb-3 text-lg font-semibold text-[#07102a]">Learning Experience</h2>
+                <h2 className="mb-3 text-lg font-semibold text-[#07102a]">
+                  Learning Experience
+                </h2>
                 <p className="text-[0.95rem] leading-relaxed text-[#5b6b80]">
                   {intern.learning}
                 </p>
