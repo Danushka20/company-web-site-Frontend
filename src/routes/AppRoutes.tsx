@@ -7,6 +7,8 @@ import AndonHardwareProductsPage from "../pages/AndonHardwareProductsPage.tsx";
 import IoTSolutionProductsPage from "../pages/IoTSolutionProductsPage.tsx";
 import SoftwareDevelopmentProductsPage from "../pages/SoftwareDevelopmentProductsPage.tsx";
 import ContactPage from "../pages/ContactPage.tsx";
+import ProjectsPage from "../pages/ProjectsPage.tsx";
+import ProjectDetailsPage from "../pages/ProjectDetailsPage.tsx";
 import DashboardPage from "../pages/dashboard/DashboardPage.tsx";
 import UserListPage from "../pages/users/UserListPage.tsx";
 import DashboardLayout from "../layouts/DashboardLayout.tsx";
@@ -20,6 +22,8 @@ const AppRoutes: React.FC = () => {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/about" element={<AboutPage />} />
+      <Route path="/projects" element={<ProjectsPage />} />
+      <Route path="/projects/:projectId" element={<ProjectDetailsPage />} />
       <Route path="/services" element={<ServicesPage />} />
       <Route path="/services/:serviceSlug" element={<ServicesPage />} />
       <Route
