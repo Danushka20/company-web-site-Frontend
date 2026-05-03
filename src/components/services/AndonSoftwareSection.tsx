@@ -1,6 +1,5 @@
 import React from "react";
 import { Cpu, Zap, Code2 } from "lucide-react";
-import ServiceProductsStrip from "./ServiceProductsStrip";
 
 /* ─── Software Features Cards ─── */
 const softwareFeatures = [
@@ -130,8 +129,6 @@ const AndonSoftwareSection: React.FC = () => {
               />
             </div>
           </div>
-
-          <ServiceProductsStrip label="View Our Andon Software" />
 
           {/* CTA */}
           <div className="mt-14 text-center">
