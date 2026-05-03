@@ -16,10 +16,10 @@ const Navbar: React.FC = () => {
   const navItems = [
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
-    { label: "Projects", href: "/projects" },
-    { label: "Interns", href: "/interns" },
-    { label: "Contact", href: "/contact" },
     { label: "Services", href: "/services" },
+    { label: "Projects", href: "/projects" },
+    { label: "Our Strength", href: "/interns" },
+    { label: "Contact", href: "/contact" },
   ];
 
   const handleCloseDropdown = useCallback(() => {
@@ -50,7 +50,7 @@ const Navbar: React.FC = () => {
       return location.pathname === "/contact";
     }
 
-    if (label === "Interns") {
+    if (label === "Our Strength") {
       return location.pathname === "/interns";
     }
 
