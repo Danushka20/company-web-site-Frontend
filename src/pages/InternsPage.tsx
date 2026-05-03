@@ -27,7 +27,10 @@ const defaultFilters: FiltersState = {
 const inferLocation = (academy: string): string => {
   const normalizedAcademy = academy.toLowerCase();
 
-  if (normalizedAcademy.includes("colombo") || normalizedAcademy.includes("apiit")) {
+  if (
+    normalizedAcademy.includes("colombo") ||
+    normalizedAcademy.includes("apiit")
+  ) {
     return "Colombo";
   }
 
@@ -53,11 +56,17 @@ const inferLocation = (academy: string): string => {
 const inferYear = (institute: string): string => {
   const normalizedInstitute = institute.toLowerCase();
 
-  if (normalizedInstitute.includes("bsc") || normalizedInstitute.includes("ba")) {
+  if (
+    normalizedInstitute.includes("bsc") ||
+    normalizedInstitute.includes("ba")
+  ) {
     return "Undergraduate";
   }
 
-  if (normalizedInstitute.includes("hnd") || normalizedInstitute.includes("higher diploma")) {
+  if (
+    normalizedInstitute.includes("hnd") ||
+    normalizedInstitute.includes("higher diploma")
+  ) {
     return "Diploma";
   }
 
@@ -68,17 +77,27 @@ const InternsPage: React.FC = () => {
   useScrollToTop();
   const [query, setQuery] = useState("");
   const [isFiltersOpen, setIsFiltersOpen] = useState(false);
-  const [appliedFilters, setAppliedFilters] = useState<FiltersState>(defaultFilters);
-  const [draftFilters, setDraftFilters] = useState<FiltersState>(defaultFilters);
+  const [appliedFilters, setAppliedFilters] =
+    useState<FiltersState>(defaultFilters);
+  const [draftFilters, setDraftFilters] =
+    useState<FiltersState>(defaultFilters);
 
   const filterOptions = useMemo(() => {
-    const positions = Array.from(new Set(interns.map((intern) => intern.role))).sort();
-    const universities = Array.from(new Set(interns.map((intern) => intern.academy))).sort();
+    const positions = Array.from(
+      new Set(interns.map((intern) => intern.role)),
+    ).sort();
+    const universities = Array.from(
+      new Set(interns.map((intern) => intern.academy)),
+    ).sort();
     const locations = Array.from(
       new Set(interns.map((intern) => inferLocation(intern.academy))),
     ).sort();
-    const years = Array.from(new Set(interns.map((intern) => inferYear(intern.institute)))).sort();
-    const durations = Array.from(new Set(interns.map((intern) => intern.duration))).sort();
+    const years = Array.from(
+      new Set(interns.map((intern) => inferYear(intern.institute))),
+    ).sort();
+    const durations = Array.from(
+      new Set(interns.map((intern) => intern.duration)),
+    ).sort();
     const skills = Array.from(
       new Set(interns.flatMap((intern) => intern.skills)),
     ).sort((a, b) => a.localeCompare(b));
@@ -89,7 +108,10 @@ const InternsPage: React.FC = () => {
   const filteredInterns = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase();
     return interns.filter((intern) => {
-      if (appliedFilters.position !== defaultFilters.position && intern.role !== appliedFilters.position) {
+      if (
+        appliedFilters.position !== defaultFilters.position &&
+        intern.role !== appliedFilters.position
+      ) {
         return false;
       }
 
@@ -107,11 +129,17 @@ const InternsPage: React.FC = () => {
         return false;
       }
 
-      if (appliedFilters.year !== defaultFilters.year && inferYear(intern.institute) !== appliedFilters.year) {
+      if (
+        appliedFilters.year !== defaultFilters.year &&
+        inferYear(intern.institute) !== appliedFilters.year
+      ) {
         return false;
       }
 
-      if (appliedFilters.duration !== defaultFilters.duration && intern.duration !== appliedFilters.duration) {
+      if (
+        appliedFilters.duration !== defaultFilters.duration &&
+        intern.duration !== appliedFilters.duration
+      ) {
         return false;
       }
 
@@ -141,7 +169,10 @@ const InternsPage: React.FC = () => {
     });
   }, [appliedFilters, query]);
 
-  const updateDraftFilter = <K extends keyof FiltersState>(key: K, value: FiltersState[K]) => {
+  const updateDraftFilter = <K extends keyof FiltersState>(
+    key: K,
+    value: FiltersState[K],
+  ) => {
     setDraftFilters((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -233,11 +264,15 @@ const InternsPage: React.FC = () => {
 
               <div className="mt-7 grid grid-cols-1 gap-x-5 gap-y-6 lg:grid-cols-3">
                 <label className="block">
-                  <span className="block text-[1.02rem] font-semibold text-[#2e3f58]">Position</span>
+                  <span className="block text-[1.02rem] font-semibold text-[#2e3f58]">
+                    Position
+                  </span>
                   <select
                     className="mt-2 h-12 w-full rounded-2xl border border-slate-300/85 bg-white px-4 text-[1.05rem] text-[#07102a] outline-none focus:border-blue-500"
                     value={draftFilters.position}
-                    onChange={(event) => updateDraftFilter("position", event.target.value)}
+                    onChange={(event) =>
+                      updateDraftFilter("position", event.target.value)
+                    }
                   >
                     <option>{defaultFilters.position}</option>
                     {filterOptions.positions.map((position) => (
@@ -247,11 +282,15 @@ const InternsPage: React.FC = () => {
                 </label>
 
                 <label className="block">
-                  <span className="block text-[1.02rem] font-semibold text-[#2e3f58]">University</span>
+                  <span className="block text-[1.02rem] font-semibold text-[#2e3f58]">
+                    University
+                  </span>
                   <select
                     className="mt-2 h-12 w-full rounded-2xl border border-slate-300/85 bg-white px-4 text-[1.05rem] text-[#07102a] outline-none focus:border-blue-500"
                     value={draftFilters.university}
-                    onChange={(event) => updateDraftFilter("university", event.target.value)}
+                    onChange={(event) =>
+                      updateDraftFilter("university", event.target.value)
+                    }
                   >
                     <option>{defaultFilters.university}</option>
                     {filterOptions.universities.map((university) => (
@@ -261,11 +300,15 @@ const InternsPage: React.FC = () => {
                 </label>
 
                 <label className="block">
-                  <span className="block text-[1.02rem] font-semibold text-[#2e3f58]">Town / Location</span>
+                  <span className="block text-[1.02rem] font-semibold text-[#2e3f58]">
+                    Town / Location
+                  </span>
                   <select
                     className="mt-2 h-12 w-full rounded-2xl border border-slate-300/85 bg-white px-4 text-[1.05rem] text-[#07102a] outline-none focus:border-blue-500"
                     value={draftFilters.location}
-                    onChange={(event) => updateDraftFilter("location", event.target.value)}
+                    onChange={(event) =>
+                      updateDraftFilter("location", event.target.value)
+                    }
                   >
                     <option>{defaultFilters.location}</option>
                     {filterOptions.locations.map((location) => (
@@ -275,11 +318,15 @@ const InternsPage: React.FC = () => {
                 </label>
 
                 <label className="block">
-                  <span className="block text-[1.02rem] font-semibold text-[#2e3f58]">Year</span>
+                  <span className="block text-[1.02rem] font-semibold text-[#2e3f58]">
+                    Year
+                  </span>
                   <select
                     className="mt-2 h-12 w-full rounded-2xl border border-slate-300/85 bg-white px-4 text-[1.05rem] text-[#07102a] outline-none focus:border-blue-500"
                     value={draftFilters.year}
-                    onChange={(event) => updateDraftFilter("year", event.target.value)}
+                    onChange={(event) =>
+                      updateDraftFilter("year", event.target.value)
+                    }
                   >
                     <option>{defaultFilters.year}</option>
                     {filterOptions.years.map((year) => (
@@ -289,16 +336,18 @@ const InternsPage: React.FC = () => {
                 </label>
 
                 <label className="block">
-                  <span className="block text-[1.02rem] font-semibold text-[#2e3f58]">Skills</span>
+                  <span className="block text-[1.02rem] font-semibold text-[#2e3f58]">
+                    Skills
+                  </span>
                   <select
                     multiple
                     size={4}
                     className="mt-2 w-full rounded-2xl border border-slate-300/85 bg-white px-4 py-3 text-[1.05rem] text-[#07102a] outline-none focus:border-blue-500"
                     value={draftFilters.skills}
                     onChange={(event) => {
-                      const selectedSkills = Array.from(event.target.selectedOptions).map(
-                        (option) => option.value,
-                      );
+                      const selectedSkills = Array.from(
+                        event.target.selectedOptions,
+                      ).map((option) => option.value);
                       updateDraftFilter("skills", selectedSkills);
                     }}
                   >
@@ -314,11 +363,15 @@ const InternsPage: React.FC = () => {
                 </label>
 
                 <label className="block">
-                  <span className="block text-[1.02rem] font-semibold text-[#2e3f58]">Internship Duration</span>
+                  <span className="block text-[1.02rem] font-semibold text-[#2e3f58]">
+                    Internship Duration
+                  </span>
                   <select
                     className="mt-2 h-12 w-full rounded-2xl border border-slate-300/85 bg-white px-4 text-[1.05rem] text-[#07102a] outline-none focus:border-blue-500"
                     value={draftFilters.duration}
-                    onChange={(event) => updateDraftFilter("duration", event.target.value)}
+                    onChange={(event) =>
+                      updateDraftFilter("duration", event.target.value)
+                    }
                   >
                     <option>{defaultFilters.duration}</option>
                     {filterOptions.durations.map((duration) => (
