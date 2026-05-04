@@ -1,6 +1,5 @@
 import React from "react";
 import { Radio, Zap, Settings } from "lucide-react";
-import ServiceProductsStrip from "./ServiceProductsStrip";
 
 /* ─── IoT Expertise Cards ─── */
 const iotExpertiseItems = [
@@ -130,11 +129,6 @@ const IoTSolutionsSection: React.FC = () => {
               />
             </div>
           </div>
-
-          <ServiceProductsStrip
-            label="View Our IoT Products"
-            href="/services/iotSolutions/products"
-          />
 
           {/* CTA */}
           <div className="mt-14 text-center">

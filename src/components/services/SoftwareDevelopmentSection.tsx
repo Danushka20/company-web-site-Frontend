@@ -1,6 +1,5 @@
 import React from "react";
 import { Code2, Smartphone, Database } from "lucide-react";
-import ServiceProductsStrip from "./ServiceProductsStrip";
 
 /* ─── Expertise Cards ─── */
 const expertiseItems = [
@@ -126,11 +125,6 @@ const SoftwareDevelopmentSection: React.FC = () => {
               />
             </div>
           </div>
-
-          <ServiceProductsStrip
-            label="View Our Software Products"
-            href="/services/softwareDevelopment/products"
-          />
 
           {/* CTA */}
           <div className="mt-14 text-center">

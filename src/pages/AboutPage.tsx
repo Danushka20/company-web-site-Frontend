@@ -8,6 +8,7 @@ import MilestonesSection from "../components/about/MilestonesSection";
 import ImpactSection from "../components/about/ImpactSection";
 import ExperienceSection from "../components/about/ExperienceSection";
 import TeamSection from "../components/about/TeamSection";
+import FeedbackForm from "../components/feedback/FeedbackForm";
 import { useScrollToTop } from "../hooks/useScrollToTop";
 
 const AboutPage: React.FC = () => {
@@ -23,6 +24,7 @@ const AboutPage: React.FC = () => {
       <MilestonesSection />
       <ImpactSection />
       <ExperienceSection />
+      <FeedbackForm />
 
       <div className="about-footer-soft -mx-4 sm:-mx-6 lg:-mx-10">
         <Footer />

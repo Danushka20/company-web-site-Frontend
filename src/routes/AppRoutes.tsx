@@ -7,6 +7,12 @@ import AndonHardwareProductsPage from "../pages/AndonHardwareProductsPage.tsx";
 import IoTSolutionProductsPage from "../pages/IoTSolutionProductsPage.tsx";
 import SoftwareDevelopmentProductsPage from "../pages/SoftwareDevelopmentProductsPage.tsx";
 import ContactPage from "../pages/ContactPage.tsx";
+import ProjectsPage from "../pages/ProjectsPage.tsx";
+import ProjectDetailsPage from "../pages/ProjectDetailsPage.tsx";
+import InternsPage from "../pages/InternsPage.tsx";
+import InternDetailsPage from "../pages/InternDetailsPage.tsx";
+import StrengthPage from "../pages/StrengthPage.tsx";
+import PermanentEmployeeDetailsPage from "../pages/PermanentEmployeeDetailsPage.tsx";
 import DashboardPage from "../pages/dashboard/DashboardPage.tsx";
 import UserListPage from "../pages/users/UserListPage.tsx";
 import DashboardLayout from "../layouts/DashboardLayout.tsx";
@@ -20,6 +26,15 @@ const AppRoutes: React.FC = () => {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/about" element={<AboutPage />} />
+      <Route path="/strength" element={<StrengthPage />} />
+      <Route
+        path="/strength/employee/:employeeId"
+        element={<PermanentEmployeeDetailsPage />}
+      />
+      <Route path="/projects" element={<ProjectsPage />} />
+      <Route path="/projects/:projectId" element={<ProjectDetailsPage />} />
+      <Route path="/interns" element={<InternsPage />} />
+      <Route path="/interns/:internId" element={<InternDetailsPage />} />
       <Route path="/services" element={<ServicesPage />} />
       <Route path="/services/:serviceSlug" element={<ServicesPage />} />
       <Route
