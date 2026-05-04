@@ -12,6 +12,7 @@ import TrustedPartnersSection from '../components/home/TrustedPartnersSection';
 import PricingSection from '../components/home/PricingSection';
 import EcosystemSection from '../components/home/EcosystemSection';
 import OutcomesSection from '../components/home/OutcomesSection';
+import ClientTestimonialsSection from '../components/home/ClientTestimonialsSection';
 
 const HomePage: React.FC = () => {
   return (
@@ -51,6 +52,7 @@ const HomePage: React.FC = () => {
       <PricingSection />
       <EcosystemSection />
       <OutcomesSection />
+      <ClientTestimonialsSection />
 
       <Footer />
 
