@@ -18,7 +18,7 @@ const Navbar: React.FC = () => {
     { label: "About", href: "/about" },
     { label: "Services", href: "/services" },
     { label: "Projects", href: "/projects" },
-    { label: "Our Strength", href: "/interns" },
+    { label: "Our Strength", href: "/strength" },
     { label: "Contact", href: "/contact" },
   ];
 
@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
     }
 
     if (label === "Our Strength") {
-      return location.pathname === "/interns";
+      return location.pathname === "/strength";
     }
 
     return false;
