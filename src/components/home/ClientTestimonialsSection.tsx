@@ -36,13 +36,13 @@ const ClientTestimonialsSection: React.FC = () => {
 
   const handlePrevious = () => {
     setCurrentIndex((prev) =>
-      prev === 0 ? testimonials.length - 1 : prev - 1
+      prev === 0 ? testimonials.length - 1 : prev - 1,
     );
   };
 
   const handleNext = () => {
     setCurrentIndex((prev) =>
-      prev === testimonials.length - 1 ? 0 : prev + 1
+      prev === testimonials.length - 1 ? 0 : prev + 1,
     );
   };
 
@@ -51,17 +51,14 @@ const ClientTestimonialsSection: React.FC = () => {
   };
 
   // Calculate average rating
-  const averageRating =
-    (
-      testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length
-    ).toFixed(1);
+  const averageRating = (
+    testimonials.reduce((sum, t) => sum + t.rating, 0) / testimonials.length
+  ).toFixed(1);
 
   const getVisibleTestimonials = () => {
     const items = [];
     for (let i = 0; i < itemsPerView; i++) {
-      items.push(
-        testimonials[(currentIndex + i) % testimonials.length]
-      );
+      items.push(testimonials[(currentIndex + i) % testimonials.length]);
     }
     return items;
   };

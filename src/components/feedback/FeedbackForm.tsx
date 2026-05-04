@@ -26,7 +26,7 @@ const FeedbackForm: React.FC = () => {
   const MAX_FEEDBACK_LENGTH = 500;
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -138,7 +138,10 @@ const FeedbackForm: React.FC = () => {
           {/* Full Name & Email */}
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="fullName" className="mb-2 block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="fullName"
+                className="mb-2 block text-sm font-medium text-gray-700"
+              >
                 Full Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -152,7 +155,10 @@ const FeedbackForm: React.FC = () => {
               />
             </div>
             <div>
-              <label htmlFor="email" className="mb-2 block text-sm font-medium text-gray-700">
+              <label
+                htmlFor="email"
+                className="mb-2 block text-sm font-medium text-gray-700"
+              >
                 Email Address <span className="text-red-500">*</span>
               </label>
               <input
@@ -202,7 +208,10 @@ const FeedbackForm: React.FC = () => {
 
           {/* Feedback */}
           <div>
-            <label htmlFor="feedback" className="mb-2 block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="feedback"
+              className="mb-2 block text-sm font-medium text-gray-700"
+            >
               Your Feedback <span className="text-red-500">*</span>
             </label>
             <textarea
