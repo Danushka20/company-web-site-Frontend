@@ -112,7 +112,9 @@ const PermanentEmployeeDetailsPage: React.FC = () => {
                 <h1 className="m-0 text-[2rem] font-bold leading-tight">
                   {employee.name}
                 </h1>
-                <p className="text-[0.95rem] text-white/90">{employee.position}</p>
+                <p className="text-[0.95rem] text-white/90">
+                  {employee.position}
+                </p>
                 <p className="text-white/80">
                   {employee.department} • {employee.experience}
                 </p>
@@ -125,7 +127,9 @@ const PermanentEmployeeDetailsPage: React.FC = () => {
                 </div>
                 <div>
                   <p className="text-sm text-white/70">Since</p>
-                  <p className="font-semibold text-white">{employee.joinDate}</p>
+                  <p className="font-semibold text-white">
+                    {employee.joinDate}
+                  </p>
                 </div>
               </div>
             </div>
@@ -143,7 +147,9 @@ const PermanentEmployeeDetailsPage: React.FC = () => {
                 <h2 className="mb-4 text-2xl font-bold text-[#07102a]">
                   About
                 </h2>
-                <p className="text-[#5b6b80] leading-relaxed">{employee.about}</p>
+                <p className="text-[#5b6b80] leading-relaxed">
+                  {employee.about}
+                </p>
               </div>
 
               {/* Specialization */}
@@ -193,9 +199,7 @@ const PermanentEmployeeDetailsPage: React.FC = () => {
                     <p className="mt-1 text-[#07102a]">{employee.position}</p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-[#6b7a8f]">
-                      Level
-                    </p>
+                    <p className="text-sm font-medium text-[#6b7a8f]">Level</p>
                     <p className="mt-1 text-[#07102a]">{employee.level}</p>
                   </div>
                   <div>
@@ -205,15 +209,11 @@ const PermanentEmployeeDetailsPage: React.FC = () => {
                     <p className="mt-1 text-[#07102a]">{employee.experience}</p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-[#6b7a8f]">
-                      Joined
-                    </p>
+                    <p className="text-sm font-medium text-[#6b7a8f]">Joined</p>
                     <p className="mt-1 text-[#07102a]">{employee.joinDate}</p>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-[#6b7a8f]">
-                      Status
-                    </p>
+                    <p className="text-sm font-medium text-[#6b7a8f]">Status</p>
                     <p className="mt-1 inline-flex rounded-full bg-green-50 px-3 py-1 text-sm font-medium text-green-700">
                       {employee.status}
                     </p>
