@@ -1,15 +1,21 @@
 import React, { useCallback, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, Menu, X, LogIn, LogOut, UserPlus } from "lucide-react";
 import smartKodersLogo from "../../assets/company-logo.png";
 import { serviceItems } from "../../data/servicesData";
 import { useDropdownClose } from "../../hooks/useDropdownClose";
+import { useAuth } from "../../hooks/useAuth";
+import LoginModal from "../auth/LoginModal";
+import RegisterModal from "../auth/RegisterModal";
 
 const Navbar: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  const { isAuthenticated, user, logout } = useAuth();
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [loginOpen, setLoginOpen] = useState(false);
+  const [registerOpen, setRegisterOpen] = useState(false);
   const isServicesPage = location.pathname.startsWith("/services");
   const selectedServicePath = isServicesPage ? location.pathname : "";
 
@@ -185,8 +191,57 @@ const Navbar: React.FC = () => {
           })}
         </ul>
 
+        {/* Desktop Auth Section and Get in Touch Button */}
+        <div className="hidden md:flex items-center gap-3">
+          {isAuthenticated ? (
+            <>
+              <button
+                type="button"
+                className="flex items-center gap-2 px-4 py-2 text-slate-600 hover:text-blue-600 transition-colors rounded-full bg-transparent border border-slate-300 hover:border-blue-600"
+                title={`Logged in as ${user?.name || user?.email}`}
+              >
+                <span className="text-sm font-medium">{user?.name || user?.email}</span>
+              </button>
+              <button
+                type="button"
+                onClick={logout}
+                className="flex items-center gap-2 px-4 py-2 text-slate-600 hover:text-red-600 transition-colors rounded-full bg-transparent border border-slate-300 hover:border-red-300"
+                aria-label="Logout"
+                title="Logout"
+              >
+                <LogOut size={18} />
+                <span className="text-sm font-medium">Logout</span>
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                type="button"
+                onClick={() => setLoginOpen(true)}
+                className="flex items-center gap-2 px-4 py-2 text-slate-600 hover:text-blue-600 transition-colors rounded-full bg-transparent border border-slate-300 hover:border-blue-600"
+                aria-label="Login"
+                title="Login"
+              >
+                <LogIn size={18} />
+                <span className="text-sm font-medium">Login</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setRegisterOpen(true)}
+                className="flex items-center gap-2 px-4 py-2 text-white bg-gradient-to-r from-blue-500 to-blue-600 rounded-full shadow-[0_8px_20px_rgba(37,99,235,0.38)] hover:-translate-y-px transition-[transform,box-shadow] duration-200 hover:shadow-[0_12px_24px_rgba(37,99,235,0.45)]"
+                aria-label="Sign Up"
+                title="Sign Up"
+              >
+                <UserPlus size={18} />
+                <span className="text-sm font-medium">Sign Up</span>
+              </button>
+            </>
+          )}
+        </div>
+
+        {/* Desktop Get in Touch Button */}
         <a
-          className="hidden md:inline-flex h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 px-7 text-[16px] lg:text-[18px] font-medium leading-none text-white no-underline shadow-[0_8px_20px_rgba(37,99,235,0.38)] transition-[transform,box-shadow] duration-200 hover:-translate-y-px hover:shadow-[0_12px_24px_rgba(37,99,235,0.45)]"
+          className="hidden lg:inline-flex h-11 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 px-7 text-[16px] font-medium leading-none text-white no-underline shadow-[0_8px_20px_rgba(37,99,235,0.38)] transition-[transform,box-shadow] duration-200 hover:-translate-y-px hover:shadow-[0_12px_24px_rgba(37,99,235,0.45)]"
           href="/contact"
         >
           Get in Touch
@@ -285,9 +340,81 @@ const Navbar: React.FC = () => {
                 </span>
               </a>
             </li>
+
+            {/* Mobile Auth Buttons */}
+            {isAuthenticated ? (
+              <>
+                <li className="mt-2 border-t border-slate-200 pt-4">
+                  <div className="flex items-center gap-2 px-4 py-3 bg-slate-100 rounded-lg mb-2">
+                    <span className="text-sm font-medium text-slate-700">
+                      {user?.name || user?.email}
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      await logout();
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="flex w-full h-11 items-center justify-center gap-2 rounded-full text-red-600 border border-red-300 hover:bg-red-50 transition-colors font-medium"
+                    aria-label="Logout"
+                  >
+                    <LogOut size={18} />
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="mt-2 border-t border-slate-200 pt-4 flex flex-col gap-2">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLoginOpen(true);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="flex h-11 w-full items-center justify-center gap-2 rounded-full text-blue-600 border border-blue-300 hover:bg-blue-50 transition-colors font-medium"
+                    aria-label="Login"
+                  >
+                    <LogIn size={18} />
+                    Login
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setRegisterOpen(true);
+                      setIsMobileMenuOpen(false);
+                    }}
+                    className="flex h-11 w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-[0_8px_20px_rgba(37,99,235,0.38)] font-medium"
+                    aria-label="Sign Up"
+                  >
+                    <UserPlus size={18} />
+                    Sign Up
+                  </button>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       )}
+      {/* Modals */}
+      <LoginModal
+        open={loginOpen}
+        onClose={() => setLoginOpen(false)}
+        onSwitchToRegister={() => {
+          setLoginOpen(false);
+          setRegisterOpen(true);
+        }}
+      />
+
+      <RegisterModal
+        open={registerOpen}
+        onClose={() => setRegisterOpen(false)}
+        onSwitchToLogin={() => {
+          setRegisterOpen(false);
+          setLoginOpen(true);
+        }}
+      />
     </nav>
   );
 };

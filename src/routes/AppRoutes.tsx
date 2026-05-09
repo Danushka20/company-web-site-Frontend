@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "../pages/HomePage.tsx";
 import AboutPage from "../pages/AboutPage.tsx";
 import ServicesPage from "../pages/ServicesPage.tsx";
@@ -16,6 +16,7 @@ import PermanentEmployeeDetailsPage from "../pages/PermanentEmployeeDetailsPage.
 import DashboardPage from "../pages/dashboard/DashboardPage.tsx";
 import UserListPage from "../pages/users/UserListPage.tsx";
 import DashboardLayout from "../layouts/DashboardLayout.tsx";
+import ProtectedRoute from "./ProtectedRoute.tsx";
 
 /**
  * APP ROUTES
@@ -24,6 +25,7 @@ import DashboardLayout from "../layouts/DashboardLayout.tsx";
 const AppRoutes: React.FC = () => {
   return (
     <Routes>
+      {/* Public Routes */}
       <Route path="/" element={<HomePage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/strength" element={<StrengthPage />} />
@@ -50,10 +52,18 @@ const AppRoutes: React.FC = () => {
         element={<AndonHardwareProductsPage />}
       />
       <Route path="/contact" element={<ContactPage />} />
-      <Route element={<DashboardLayout />}>
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/users" element={<UserListPage />} />
+
+      {/* Protected Routes */}
+      <Route element={<ProtectedRoute />}>
+        <Route element={<DashboardLayout />}>
+          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/users" element={<UserListPage />} />
+          <Route path="/home" element={<DashboardPage />} />
+        </Route>
       </Route>
+
+      {/* Catch-all redirect */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };

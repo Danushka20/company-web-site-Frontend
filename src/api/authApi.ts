@@ -1,4 +1,5 @@
 import api from "./axios";
+import { authStore } from "../store/authStore";
 
 export const authApi = {
   login: async (credentials: { email: string; password: string }) => {
@@ -17,8 +18,29 @@ export const authApi = {
   },
 
   logout: async () => {
-    // Backend may use token revocation; implement if available
-    // For now, clear client-side token only
-    return;
+    try {
+      // Call backend logout endpoint if available
+      await api.post("/api/logout");
+    } catch (err) {
+      // Continue with client-side logout even if backend call fails
+    }
+    // Clear client-side auth state
+    authStore.setToken(null);
+    authStore.setUser(null);
+  },
+
+  refreshToken: async () => {
+    try {
+      const response = await api.post("/api/refresh-token");
+      const token = response.data?.access_token;
+      if (token) {
+        authStore.setToken(token);
+      }
+      return response.data;
+    } catch (err) {
+      authStore.setToken(null);
+      authStore.setUser(null);
+      throw err;
+    }
   },
 };
