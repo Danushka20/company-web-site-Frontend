@@ -101,8 +101,8 @@ export async function resetPassword({
   });
   return res.data;
 }
-import api from './axios';
-import type { User } from '../types/User';
+import api from "./axios";
+import type { User } from "../types/User";
 
 /**
  * USER API
@@ -113,7 +113,7 @@ export const userApi = {
    * Fetch all users for the current tenant.
    */
   getUsers: async (): Promise<User[]> => {
-    const response = await api.get('/users');
+    const response = await api.get("/users");
     return response.data;
   },
 
@@ -121,7 +121,7 @@ export const userApi = {
    * Create a new team member.
    */
   createUser: async (userData: Partial<User>): Promise<User> => {
-    const response = await api.post('/users', userData);
+    const response = await api.post("/users", userData);
     return response.data;
   },
 };

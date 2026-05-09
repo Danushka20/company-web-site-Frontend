@@ -9,6 +9,6 @@ export const jobPositionSchema = z.object({
 export type jobPositionSchema = z.infer<typeof jobPositionSchema>;
 
 export async function fetchJobPositionData() {
-    const res = await axios.get("/api/job-positions");
-    return res.data;
+  const res = await axios.get("/api/job-positions");
+  return res.data;
 }

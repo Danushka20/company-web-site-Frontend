@@ -63,7 +63,7 @@ function SwitchButton({
   disabled?: boolean;
   ariaLabel?: string;
 }) {
-  const switchId = `switch-${label.replace(/\s+/g, '-').toLowerCase()}`;
+  const switchId = `switch-${label.replace(/\s+/g, "-").toLowerCase()}`;
 
   return (
     <Box
@@ -79,7 +79,7 @@ function SwitchButton({
         onChange={(e) => onChange(e.target.checked)}
         disabled={disabled}
         aria-label={ariaLabel || label}
-        inputProps={{ 'aria-labelledby': `${switchId}-label` }}
+        inputProps={{ "aria-labelledby": `${switchId}-label` }}
       />
       <Typography
         variant="body1"

@@ -327,7 +327,7 @@ function RegistrationForm() {
                 size="small"
                 options={
                   jobPositions?.map(
-                    (supplierType) => supplierType.jobPosition
+                    (supplierType) => supplierType.jobPosition,
                   ) || []
                 }
                 sx={{ marginTop: "1rem" }}

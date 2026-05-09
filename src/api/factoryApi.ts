@@ -9,6 +9,6 @@ export const factorySchema = z.object({
 export type factorySchema = z.infer<typeof factorySchema>;
 
 export async function fetchFactoryData() {
-    const res = await axios.get("/api/factory");
-    return res.data;
+  const res = await axios.get("/api/factory");
+  return res.data;
 }

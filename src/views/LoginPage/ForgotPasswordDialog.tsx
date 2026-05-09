@@ -11,11 +11,21 @@ import {
 } from "@mui/material";
 import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
-import { forgotPassword, otpVerification, resetPassword } from "../../api/userApi";
+import {
+  forgotPassword,
+  otpVerification,
+  resetPassword,
+} from "../../api/userApi";
 import { useSnackbar } from "notistack";
 import theme from "../../theme";
 
-function ForgotPasswordDialog({ open, handleClose }: { open: boolean; handleClose: () => void }) {
+function ForgotPasswordDialog({
+  open,
+  handleClose,
+}: {
+  open: boolean;
+  handleClose: () => void;
+}) {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const { enqueueSnackbar } = useSnackbar();
   const [emailDisabled, setEmailDisabled] = React.useState(false);
@@ -39,19 +49,23 @@ function ForgotPasswordDialog({ open, handleClose }: { open: boolean; handleClos
     },
   });
 
-  const { mutate: forgotPasswordMutation, isPending: isForgotPasswordPending } = useMutation({
-    mutationFn: forgotPassword,
-    onSuccess: () => {
-      enqueueSnackbar("OTP sent to your email", { variant: "success" });
-      setEmailDisabled(true);
-      setShowOTPField(true);
-    },
-    onError: () => {
-      enqueueSnackbar("OTP sending failed", { variant: "error" });
-    },
-  });
+  const { mutate: forgotPasswordMutation, isPending: isForgotPasswordPending } =
+    useMutation({
+      mutationFn: forgotPassword,
+      onSuccess: () => {
+        enqueueSnackbar("OTP sent to your email", { variant: "success" });
+        setEmailDisabled(true);
+        setShowOTPField(true);
+      },
+      onError: () => {
+        enqueueSnackbar("OTP sending failed", { variant: "error" });
+      },
+    });
 
-  const { mutate: otpVerificationMutation, isPending: isOtpVerificationPending } = useMutation({
+  const {
+    mutate: otpVerificationMutation,
+    isPending: isOtpVerificationPending,
+  } = useMutation({
     mutationFn: otpVerification,
     onSuccess: () => {
       enqueueSnackbar("OTP Verified Successfully", { variant: "success" });
@@ -63,22 +77,28 @@ function ForgotPasswordDialog({ open, handleClose }: { open: boolean; handleClos
     },
   });
 
-  const { mutate: resetPasswordMutation, isPending: isResetPasswordPending } = useMutation({
-    mutationFn: resetPassword,
-    onSuccess: () => {
-      enqueueSnackbar("Password reset successful!", { variant: "success" });
-      reset();
-      setEmailDisabled(false);
-      setShowOTPField(false);
-      setShowPasswordFields(false);
-      handleClose();
-    },
-    onError: () => {
-      enqueueSnackbar("Password reset failed", { variant: "error" });
-    },
-  });
+  const { mutate: resetPasswordMutation, isPending: isResetPasswordPending } =
+    useMutation({
+      mutationFn: resetPassword,
+      onSuccess: () => {
+        enqueueSnackbar("Password reset successful!", { variant: "success" });
+        reset();
+        setEmailDisabled(false);
+        setShowOTPField(false);
+        setShowPasswordFields(false);
+        handleClose();
+      },
+      onError: () => {
+        enqueueSnackbar("Password reset failed", { variant: "error" });
+      },
+    });
 
-  const onSubmit = (data: { email: string; otp?: string; password?: string; confirmPassword?: string }) => {
+  const onSubmit = (data: {
+    email: string;
+    otp?: string;
+    password?: string;
+    confirmPassword?: string;
+  }) => {
     if (!showOTPField && !showPasswordFields) {
       forgotPasswordMutation({ email: data.email });
     } else if (showOTPField) {
@@ -94,8 +114,9 @@ function ForgotPasswordDialog({ open, handleClose }: { open: boolean; handleClos
         <DialogTitle>Don't Worry</DialogTitle>
         <DialogContent>
           <Typography variant="body2" sx={{ color: "#525252" }}>
-            We are here to help you recover your password. Enter the email associated with your account, and we'll send
-            an email with instructions to reset your password.
+            We are here to help you recover your password. Enter the email
+            associated with your account, and we'll send an email with
+            instructions to reset your password.
           </Typography>
 
           <TextField
@@ -170,7 +191,8 @@ function ForgotPasswordDialog({ open, handleClose }: { open: boolean; handleClos
               <TextField
                 {...register("confirmPassword", {
                   required: "Confirm Password is required",
-                  validate: (value) => value === watch("password") || "Passwords do not match",
+                  validate: (value) =>
+                    value === watch("password") || "Passwords do not match",
                 })}
                 margin="dense"
                 id="confirmPassword"
@@ -197,22 +219,31 @@ function ForgotPasswordDialog({ open, handleClose }: { open: boolean; handleClos
               reset();
               handleClose();
             }}
-            disabled={isForgotPasswordPending || isOtpVerificationPending || isResetPasswordPending}
+            disabled={
+              isForgotPasswordPending ||
+              isOtpVerificationPending ||
+              isResetPasswordPending
+            }
           >
             Cancel
           </Button>
           <Button
             type="submit"
             variant="contained"
-            disabled={isForgotPasswordPending || isOtpVerificationPending || isResetPasswordPending || isSubmitting}
+            disabled={
+              isForgotPasswordPending ||
+              isOtpVerificationPending ||
+              isResetPasswordPending ||
+              isSubmitting
+            }
           >
             {isForgotPasswordPending || isSubmitting
               ? "Submitting..."
               : showPasswordFields
-              ? "Reset Password"
-              : showOTPField
-              ? "Verify OTP"
-              : "Submit"}
+                ? "Reset Password"
+                : showOTPField
+                  ? "Verify OTP"
+                  : "Submit"}
           </Button>
         </DialogActions>
       </form>
