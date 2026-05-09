@@ -1,17 +1,24 @@
 import api from './axios';
-import type { AuthResponse } from '../types/Auth';
 
-/**
- * AUTH API
- * Handles user authentication processes.
- */
 export const authApi = {
-  login: async (credentials: any): Promise<AuthResponse> => {
-    const response = await api.post('/auth/login', credentials);
+  login: async (credentials: { email: string; password: string }) => {
+    const response = await api.post('/api/login', credentials);
     return response.data;
   },
 
-  logout: async (): Promise<void> => {
-    await api.post('/auth/logout');
+  register: async (payload: any) => {
+    const response = await api.post('/api/register', payload);
+    return response.data;
+  },
+
+  me: async () => {
+    const response = await api.get('/api/user');
+    return response.data;
+  },
+
+  logout: async () => {
+    // Backend may use token revocation; implement if available
+    // For now, clear client-side token only
+    return;
   },
 };
