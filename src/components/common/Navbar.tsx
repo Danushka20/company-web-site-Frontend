@@ -200,7 +200,9 @@ const Navbar: React.FC = () => {
                 className="flex items-center gap-2 px-4 py-2 text-slate-600 hover:text-blue-600 transition-colors rounded-full bg-transparent border border-slate-300 hover:border-blue-600"
                 title={`Logged in as ${user?.name || user?.email}`}
               >
-                <span className="text-sm font-medium">{user?.name || user?.email}</span>
+                <span className="text-sm font-medium">
+                  {user?.name || user?.email}
+                </span>
               </button>
               <button
                 type="button"

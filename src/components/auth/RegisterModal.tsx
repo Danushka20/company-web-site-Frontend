@@ -20,7 +20,7 @@ const RegisterModal: React.FC<Props> = ({ open, onClose, onSwitchToLogin }) => {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  
+
   // Animation states
   const [isRendered, setIsRendered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
@@ -70,7 +70,11 @@ const RegisterModal: React.FC<Props> = ({ open, onClose, onSwitchToLogin }) => {
       }
     } catch (err: any) {
       const errorMsg =
-        err?.response?.data?.message || err?.response?.data?.errors?.[Object.keys(err.response.data.errors)[0]]?.[0] || "Registration failed. Please check your details.";
+        err?.response?.data?.message ||
+        err?.response?.data?.errors?.[
+          Object.keys(err.response.data.errors)[0]
+        ]?.[0] ||
+        "Registration failed. Please check your details.";
       setError(errorMsg);
     } finally {
       setLoading(false);
@@ -80,18 +84,18 @@ const RegisterModal: React.FC<Props> = ({ open, onClose, onSwitchToLogin }) => {
   return ReactDOM.createPortal(
     <div className="fixed inset-0 z-[3000] flex items-center justify-center p-4 sm:p-0">
       {/* Blurred Backdrop */}
-      <div 
-        className={`absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0'}`} 
-        onClick={onClose} 
+      <div
+        className={`absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity duration-300 ${isVisible ? "opacity-100" : "opacity-0"}`}
+        onClick={onClose}
       />
-      
+
       {/* Modal Content */}
-      <div 
-        className={`relative z-10 w-full max-w-[480px] overflow-hidden rounded-2xl bg-white shadow-2xl transition-all duration-300 max-h-[90vh] overflow-y-auto ${isVisible ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-4'}`}
+      <div
+        className={`relative z-10 w-full max-w-[480px] overflow-hidden rounded-2xl bg-white shadow-2xl transition-all duration-300 max-h-[90vh] overflow-y-auto ${isVisible ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-4"}`}
       >
         {/* Top Gradient Bar */}
         <div className="h-1.5 w-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600" />
-        
+
         <button
           type="button"
           onClick={onClose}
@@ -108,7 +112,9 @@ const RegisterModal: React.FC<Props> = ({ open, onClose, onSwitchToLogin }) => {
               alt="Company Logo"
               className="mb-3 h-10 w-auto object-contain"
             />
-            <h2 className="text-2xl font-bold text-slate-800 tracking-tight">Create Account</h2>
+            <h2 className="text-2xl font-bold text-slate-800 tracking-tight">
+              Create Account
+            </h2>
             <p className="mt-1 text-sm text-slate-500">
               Join us today for a seamless experience
             </p>
@@ -125,16 +131,18 @@ const RegisterModal: React.FC<Props> = ({ open, onClose, onSwitchToLogin }) => {
             )}
 
             <div className="space-y-1.5">
-              <label className="text-[13px] font-semibold tracking-wide text-slate-600 uppercase">Full Name</label>
+              <label className="text-[13px] font-semibold tracking-wide text-slate-600 uppercase">
+                Full Name
+              </label>
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
                   <User size={16} />
                 </div>
-                <input 
+                <input
                   type="text"
-                  value={name} 
-                  onChange={(e) => setName(e.target.value)} 
-                  required 
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
                   className="block h-10 w-full rounded-xl border border-slate-200 bg-slate-50 pl-9 pr-3 text-sm text-slate-800 outline-none transition-all placeholder:text-slate-400 hover:border-slate-300 hover:bg-white focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
                   placeholder="e.g. John Doe"
                 />
@@ -142,16 +150,18 @@ const RegisterModal: React.FC<Props> = ({ open, onClose, onSwitchToLogin }) => {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-[13px] font-semibold tracking-wide text-slate-600 uppercase">Email Address</label>
+              <label className="text-[13px] font-semibold tracking-wide text-slate-600 uppercase">
+                Email Address
+              </label>
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
                   <Mail size={16} />
                 </div>
-                <input 
+                <input
                   type="email"
-                  value={email} 
-                  onChange={(e) => setEmail(e.target.value)} 
-                  required 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
                   className="block h-10 w-full rounded-xl border border-slate-200 bg-slate-50 pl-9 pr-3 text-sm text-slate-800 outline-none transition-all placeholder:text-slate-400 hover:border-slate-300 hover:bg-white focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
                   placeholder="name@company.com"
                 />
@@ -159,16 +169,18 @@ const RegisterModal: React.FC<Props> = ({ open, onClose, onSwitchToLogin }) => {
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-[13px] font-semibold tracking-wide text-slate-600 uppercase">Mobile Number</label>
+              <label className="text-[13px] font-semibold tracking-wide text-slate-600 uppercase">
+                Mobile Number
+              </label>
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
                   <Phone size={16} />
                 </div>
-                <input 
+                <input
                   type="tel"
-                  value={mobile} 
-                  onChange={(e) => setMobile(e.target.value)} 
-                  required 
+                  value={mobile}
+                  onChange={(e) => setMobile(e.target.value)}
+                  required
                   className="block h-10 w-full rounded-xl border border-slate-200 bg-slate-50 pl-9 pr-3 text-sm text-slate-800 outline-none transition-all placeholder:text-slate-400 hover:border-slate-300 hover:bg-white focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
                   placeholder="07X XXX XXXX"
                 />
@@ -177,16 +189,18 @@ const RegisterModal: React.FC<Props> = ({ open, onClose, onSwitchToLogin }) => {
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-[13px] font-semibold tracking-wide text-slate-600 uppercase">Password</label>
+                <label className="text-[13px] font-semibold tracking-wide text-slate-600 uppercase">
+                  Password
+                </label>
                 <div className="relative">
                   <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
                     <Lock size={16} />
                   </div>
-                  <input 
+                  <input
                     type="password"
-                    value={password} 
-                    onChange={(e) => setPassword(e.target.value)} 
-                    required 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
                     className="block h-10 w-full rounded-xl border border-slate-200 bg-slate-50 pl-9 pr-3 text-sm text-slate-800 outline-none transition-all placeholder:text-slate-400 hover:border-slate-300 hover:bg-white focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
                     placeholder="••••••••"
                   />
@@ -194,16 +208,18 @@ const RegisterModal: React.FC<Props> = ({ open, onClose, onSwitchToLogin }) => {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[13px] font-semibold tracking-wide text-slate-600 uppercase">Confirm</label>
+                <label className="text-[13px] font-semibold tracking-wide text-slate-600 uppercase">
+                  Confirm
+                </label>
                 <div className="relative">
                   <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
                     <Lock size={16} />
                   </div>
-                  <input 
+                  <input
                     type="password"
-                    value={passwordConfirmation} 
-                    onChange={(e) => setPasswordConfirmation(e.target.value)} 
-                    required 
+                    value={passwordConfirmation}
+                    onChange={(e) => setPasswordConfirmation(e.target.value)}
+                    required
                     className="block h-10 w-full rounded-xl border border-slate-200 bg-slate-50 pl-9 pr-3 text-sm text-slate-800 outline-none transition-all placeholder:text-slate-400 hover:border-slate-300 hover:bg-white focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
                     placeholder="••••••••"
                   />
@@ -211,8 +227,8 @@ const RegisterModal: React.FC<Props> = ({ open, onClose, onSwitchToLogin }) => {
               </div>
             </div>
 
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               disabled={loading}
               className="mt-6 flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 font-semibold text-white shadow-[0_4px_14px_0_rgb(37,99,235,0.39)] transition-all hover:shadow-[0_6px_20px_rgba(37,99,235,0.23)] hover:from-blue-500 hover:to-indigo-500 disabled:opacity-70 disabled:cursor-not-allowed"
             >
@@ -222,7 +238,9 @@ const RegisterModal: React.FC<Props> = ({ open, onClose, onSwitchToLogin }) => {
                   <span>Creating Account...</span>
                 </div>
               ) : (
-                <span className="flex items-center gap-2 text-[15px]">Create Account <UserPlus size={18} /></span>
+                <span className="flex items-center gap-2 text-[15px]">
+                  Create Account <UserPlus size={18} />
+                </span>
               )}
             </button>
           </form>
@@ -230,7 +248,7 @@ const RegisterModal: React.FC<Props> = ({ open, onClose, onSwitchToLogin }) => {
 
         <div className="border-t border-slate-100 bg-slate-50 px-8 py-5 text-center">
           <p className="text-sm text-slate-600">
-            Already have an account?{' '}
+            Already have an account?{" "}
             <button
               type="button"
               onClick={() => {
@@ -245,7 +263,7 @@ const RegisterModal: React.FC<Props> = ({ open, onClose, onSwitchToLogin }) => {
         </div>
       </div>
     </div>,
-    document.body
+    document.body,
   );
 };
 
