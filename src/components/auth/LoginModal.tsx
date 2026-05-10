@@ -45,7 +45,7 @@ const LoginModal: React.FC<Props> = ({ open, onClose, onSwitchToRegister }) => {
       const token = data?.access_token ?? data?.token ?? null;
       if (token) {
         authStore.setToken(token);
-        
+
         // Use user data from login response if available
         if (data?.user) {
           authStore.setUser(data.user);
