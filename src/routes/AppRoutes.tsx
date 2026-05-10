@@ -15,8 +15,14 @@ import StrengthPage from "../pages/StrengthPage.tsx";
 import PermanentEmployeeDetailsPage from "../pages/PermanentEmployeeDetailsPage.tsx";
 import DashboardPage from "../pages/dashboard/DashboardPage.tsx";
 import UserListPage from "../pages/users/UserListPage.tsx";
+import AdminDashboard from "../pages/admin/AdminDashboard.tsx";
+import ProjectsManagementPage from "../pages/admin/ProjectsManagementPage.tsx";
+import AddProjectPage from "../pages/admin/AddProjectPage.tsx";
+import LoginPage from "../pages/auth/LoginPage.tsx";
+import RegisterPage from "../pages/auth/RegisterPage.tsx";
 import DashboardLayout from "../layouts/DashboardLayout.tsx";
 import ProtectedRoute from "./ProtectedRoute.tsx";
+import AdminRoute from "./AdminRoute.tsx";
 
 /**
  * APP ROUTES
@@ -53,6 +59,11 @@ const AppRoutes: React.FC = () => {
       />
       <Route path="/contact" element={<ContactPage />} />
 
+      {/* Auth Routes */}
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/Sign-in" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+
       {/* Protected Routes */}
       <Route element={<ProtectedRoute />}>
         <Route element={<DashboardLayout />}>
@@ -60,6 +71,13 @@ const AppRoutes: React.FC = () => {
           <Route path="/users" element={<UserListPage />} />
           <Route path="/home" element={<DashboardPage />} />
         </Route>
+      </Route>
+
+      {/* Admin Routes */}
+      <Route element={<AdminRoute />}>
+        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/admin/projects" element={<ProjectsManagementPage />} />
+        <Route path="/admin/projects/add" element={<AddProjectPage />} />
       </Route>
 
       {/* Catch-all redirect */}

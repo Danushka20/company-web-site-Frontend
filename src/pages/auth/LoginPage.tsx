@@ -29,14 +29,32 @@ const LoginPage: React.FC = () => {
 
       if (token) {
         authStore.setToken(token);
-        // Optionally fetch current user
-        try {
-          const me = await authApi.me();
-          authStore.setUser(me?.user ?? me ?? null);
-        } catch (err) {
-          console.error("Failed to fetch user info:", err);
+        // Use user data from login response if available
+        if (data?.user) {
+          authStore.setUser(data.user);
+          // Redirect to admin dashboard if user is admin
+          if (data.user.role === "admin" || data.user.role === "Admin") {
+            navigate("/admin");
+          } else {
+            navigate("/home");
+          }
+        } else {
+          // Fallback: fetch current user if not in response
+          try {
+            const me = await authApi.me();
+            const user = me?.user ?? me ?? null;
+            authStore.setUser(user);
+            // Check role and redirect accordingly
+            if (user?.role === "admin" || user?.role === "Admin") {
+              navigate("/admin");
+            } else {
+              navigate("/home");
+            }
+          } catch (err) {
+            console.error("Failed to fetch user info:", err);
+            navigate("/home");
+          }
         }
-        navigate("/home");
       } else {
         setError("Login failed: No token received");
       }

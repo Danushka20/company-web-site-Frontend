@@ -73,15 +73,28 @@ const RegisterPage: React.FC = () => {
 
       if (token) {
         authStore.setToken(token);
-        try {
-          const me = await authApi.me();
-          authStore.setUser(me?.user ?? me ?? null);
-        } catch (err) {
-          console.error("Failed to fetch user info:", err);
+        // Use user data from login response if available
+        if (loginData?.user) {
+          authStore.setUser(loginData.user);
+
+          // Redirect to admin dashboard if user is admin, otherwise to home
+          if (loginData.user.role === "admin") {
+            navigate("/admin");
+          } else {
+            navigate("/home");
+          }
+        } else {
+          // Fallback: fetch current user if not in response
+          try {
+            const me = await authApi.me();
+            authStore.setUser(me?.user ?? me ?? null);
+            navigate("/home");
+          } catch (err) {
+            console.error("Failed to fetch user info:", err);
+            navigate("/home");
+          }
         }
       }
-
-      navigate("/home");
     } catch (err: any) {
       const errorMsg =
         err?.response?.data?.message ||
