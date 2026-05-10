@@ -27,7 +27,11 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response?.status === 401) {
+    const skipUnauthorizedRedirect =
+      error.config?.headers?.["X-Skip-Unauthorized-Redirect"] === "true" ||
+      error.config?.headers?.get?.("X-Skip-Unauthorized-Redirect") === "true";
+
+    if (error.response?.status === 401 && !skipUnauthorizedRedirect) {
       // Clear auth on unauthorized
       authStore.setToken(null);
       authStore.setUser(null);

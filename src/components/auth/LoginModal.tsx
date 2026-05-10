@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+import { useNavigate } from "react-router-dom";
 import { X, LogIn, Mail, Lock } from "lucide-react";
 import Button from "../ui/Button";
 import { authApi } from "../../api/authApi";
@@ -19,6 +20,7 @@ const LoginModal: React.FC<Props> = ({ open, onClose, onSwitchToRegister }) => {
   const [error, setError] = useState("");
   const [isRendered, setIsRendered] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (open) {
@@ -43,11 +45,31 @@ const LoginModal: React.FC<Props> = ({ open, onClose, onSwitchToRegister }) => {
       const token = data?.access_token ?? data?.token ?? null;
       if (token) {
         authStore.setToken(token);
-        try {
-          const me = await authApi.me();
-          authStore.setUser(me?.user ?? me ?? null);
-        } catch (_) {}
-        onClose();
+        
+        // Use user data from login response if available
+        if (data?.user) {
+          authStore.setUser(data.user);
+          onClose();
+          // Redirect to admin dashboard if user is admin
+          if (data.user.role === "admin" || data.user.role === "Admin") {
+            navigate("/admin");
+          }
+        } else {
+          // Fallback: fetch current user if not in response
+          try {
+            const me = await authApi.me();
+            const user = me?.user ?? me ?? null;
+            authStore.setUser(user);
+            onClose();
+            // Check role and redirect accordingly
+            if (user?.role === "admin" || user?.role === "Admin") {
+              navigate("/admin");
+            }
+          } catch (err) {
+            console.error("Failed to fetch user info:", err);
+            onClose();
+          }
+        }
       } else {
         setError("Login failed: no token received");
       }

@@ -16,7 +16,7 @@ export const useAuth = () => {
     } catch (error) {
       console.error("Logout error:", error);
     } finally {
-      navigate("/login");
+      navigate("/");
     }
   }, [navigate]);
 

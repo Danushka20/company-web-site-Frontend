@@ -50,7 +50,14 @@ function LoginForm() {
       queryClient.invalidateQueries({ queryKey: ["current-user"] });
       localStorage.setItem("token", data?.access_token);
       enqueueSnackbar("Welcome Back!", { variant: "success" });
-      navigate("/home");
+      
+      // Check user role and redirect accordingly
+      const user = data?.user;
+      if (user?.role === "admin" || user?.role === "Admin") {
+        navigate("/admin");
+      } else {
+        navigate("/home");
+      }
     },
     onError: () => {
       enqueueSnackbar(`Login Failed`, {

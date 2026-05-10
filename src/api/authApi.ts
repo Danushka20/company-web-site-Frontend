@@ -20,7 +20,11 @@ export const authApi = {
   logout: async () => {
     try {
       // Call backend logout endpoint if available
-      await api.post("/api/logout");
+      await api.post("/api/logout", null, {
+        headers: {
+          "X-Skip-Unauthorized-Redirect": "true",
+        },
+      });
     } catch (err) {
       // Continue with client-side logout even if backend call fails
     }
