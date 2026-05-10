@@ -51,4 +51,19 @@ export const authApi = {
       throw err;
     }
   },
+
+  forgotPassword: async (email: string) => {
+    const response = await api.post("/api/forgot-password", { email });
+    return response.data;
+  },
+
+  verifyOtp: async (email: string, otp: string) => {
+    const response = await api.post("/api/reset-password", { email, otp });
+    return response.data;
+  },
+
+  resetPassword: async (payload: { email: string; otp: string; password: string }) => {
+    const response = await api.post("/api/change-password", payload);
+    return response.data;
+  },
 };

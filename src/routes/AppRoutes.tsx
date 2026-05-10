@@ -20,6 +20,7 @@ import ProjectsManagementPage from "../pages/admin/ProjectsManagementPage.tsx";
 import AddProjectPage from "../pages/admin/AddProjectPage.tsx";
 import LoginPage from "../pages/auth/LoginPage.tsx";
 import RegisterPage from "../pages/auth/RegisterPage.tsx";
+import ForgotPasswordPage from "../pages/auth/ForgotPasswordPage.tsx";
 import DashboardLayout from "../layouts/DashboardLayout.tsx";
 import ProtectedRoute from "./ProtectedRoute.tsx";
 import AdminRoute from "./AdminRoute.tsx";
@@ -61,6 +62,7 @@ const AppRoutes: React.FC = () => {
 
       {/* Auth Routes (login page removed - use modal or home for auth) */}
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
       {/* Protected Routes */}
       <Route element={<ProtectedRoute />}>

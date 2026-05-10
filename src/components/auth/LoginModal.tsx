@@ -153,12 +153,16 @@ const LoginModal: React.FC<Props> = ({ open, onClose, onSwitchToRegister }) => {
                 <label className="text-sm font-medium text-slate-700">
                   Password
                 </label>
-                <a
-                  href="#"
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    navigate("/forgot-password");
+                  }}
                   className="text-xs font-semibold text-blue-600 hover:text-blue-700"
                 >
                   Forgot password?
-                </a>
+                </button>
               </div>
               <div className="relative">
                 <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
