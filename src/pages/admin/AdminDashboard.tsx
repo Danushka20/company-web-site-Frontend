@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Plus, FileText, Users, Settings, BarChart3, LogOut } from "lucide-react";
+import {
+  Plus,
+  FileText,
+  Users,
+  Settings,
+  BarChart3,
+  LogOut,
+} from "lucide-react";
 import { useAuth } from "../../hooks/useAuth";
 
 const AdminDashboard: React.FC = () => {
@@ -13,7 +20,12 @@ const AdminDashboard: React.FC = () => {
 
   const adminMenuItems = [
     { id: "overview", label: "Dashboard", icon: BarChart3, href: "#" },
-    { id: "projects", label: "Manage Projects", icon: FileText, href: "/admin/projects" },
+    {
+      id: "projects",
+      label: "Manage Projects",
+      icon: FileText,
+      href: "/admin/projects",
+    },
     { id: "users", label: "Manage Users", icon: Users, href: "/admin/users" },
     { id: "settings", label: "Settings", icon: Settings, href: "#" },
   ];
@@ -66,8 +78,12 @@ const AdminDashboard: React.FC = () => {
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-              <p className="text-gray-600 mt-2">Welcome to the administration panel</p>
+              <h1 className="text-3xl font-bold text-gray-900">
+                Admin Dashboard
+              </h1>
+              <p className="text-gray-600 mt-2">
+                Welcome to the administration panel
+              </p>
             </div>
             <Link
               to="/admin/projects/add"
@@ -87,7 +103,9 @@ const AdminDashboard: React.FC = () => {
               { label: "Pending Tasks", value: "8", color: "orange" },
             ].map((stat, idx) => (
               <div key={idx} className="bg-white rounded-lg shadow p-6">
-                <p className="text-gray-600 text-sm font-medium">{stat.label}</p>
+                <p className="text-gray-600 text-sm font-medium">
+                  {stat.label}
+                </p>
                 <p className={`text-3xl font-bold mt-2 text-${stat.color}-600`}>
                   {stat.value}
                 </p>
@@ -98,7 +116,9 @@ const AdminDashboard: React.FC = () => {
           {/* Projects Table Preview */}
           <div className="bg-white rounded-lg shadow">
             <div className="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-gray-900">Recent Projects</h2>
+              <h2 className="text-lg font-semibold text-gray-900">
+                Recent Projects
+              </h2>
               <Link
                 to="/admin/projects"
                 className="text-blue-600 hover:text-blue-700 text-sm font-medium"
@@ -126,7 +146,10 @@ const AdminDashboard: React.FC = () => {
                 </thead>
                 <tbody>
                   {[1, 2, 3].map((item) => (
-                    <tr key={item} className="border-b border-gray-200 hover:bg-gray-50">
+                    <tr
+                      key={item}
+                      className="border-b border-gray-200 hover:bg-gray-50"
+                    >
                       <td className="px-6 py-4 text-sm text-gray-900">
                         Project #{item}
                       </td>
