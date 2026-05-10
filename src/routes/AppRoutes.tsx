@@ -59,9 +59,7 @@ const AppRoutes: React.FC = () => {
       />
       <Route path="/contact" element={<ContactPage />} />
 
-      {/* Auth Routes */}
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/Sign-in" element={<LoginPage />} />
+      {/* Auth Routes (login page removed - use modal or home for auth) */}
       <Route path="/register" element={<RegisterPage />} />
 
       {/* Protected Routes */}

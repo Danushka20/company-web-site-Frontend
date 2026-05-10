@@ -3,7 +3,11 @@ import { authStore } from "../store/authStore";
 
 export const authApi = {
   login: async (credentials: { email: string; password: string }) => {
-    const response = await api.post("/api/login", credentials);
+    const response = await api.post("/api/login", credentials, {
+      headers: {
+        "X-Skip-Unauthorized-Redirect": "true",
+      },
+    });
     return response.data;
   },
 

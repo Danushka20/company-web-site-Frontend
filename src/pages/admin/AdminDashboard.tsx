@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Plus, FileText, Users, Settings, BarChart3 } from "lucide-react";
+import { Plus, FileText, Users, Settings, BarChart3, LogOut } from "lucide-react";
+import { useAuth } from "../../hooks/useAuth";
 
 const AdminDashboard: React.FC = () => {
   const [activeTab, setActiveTab] = useState("overview");
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    void logout();
+  };
 
   const adminMenuItems = [
     { id: "overview", label: "Dashboard", icon: BarChart3, href: "#" },
@@ -15,13 +21,13 @@ const AdminDashboard: React.FC = () => {
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
-      <aside className="w-64 bg-white border-r border-gray-200 shadow-sm">
+      <aside className="w-64 bg-white border-r border-gray-200 shadow-sm flex flex-col">
         <div className="p-6">
           <h2 className="text-xl font-bold text-gray-900">Admin Panel</h2>
           <p className="text-sm text-gray-500 mt-1">Manage your platform</p>
         </div>
 
-        <nav className="px-4 py-4 space-y-2">
+        <nav className="px-4 py-4 space-y-2 flex-1">
           {adminMenuItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -41,6 +47,17 @@ const AdminDashboard: React.FC = () => {
             );
           })}
         </nav>
+
+        <div className="px-4 pb-6">
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="w-full inline-flex items-center justify-center gap-2 border border-red-200 text-red-600 px-4 py-3 rounded-lg hover:bg-red-50 transition-colors font-medium"
+          >
+            <LogOut size={18} />
+            Logout
+          </button>
+        </div>
       </aside>
 
       {/* Main Content */}

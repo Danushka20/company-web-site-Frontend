@@ -30,12 +30,18 @@ api.interceptors.response.use(
     const skipUnauthorizedRedirect =
       error.config?.headers?.["X-Skip-Unauthorized-Redirect"] === "true" ||
       error.config?.headers?.get?.("X-Skip-Unauthorized-Redirect") === "true";
+    const hasActiveSession = !!authStore.token;
 
-    if (error.response?.status === 401 && !skipUnauthorizedRedirect) {
+    if (
+      error.response?.status === 401 &&
+      !skipUnauthorizedRedirect &&
+      hasActiveSession
+    ) {
       // Clear auth on unauthorized
       authStore.setToken(null);
       authStore.setUser(null);
-      window.location.href = "/login";
+      // send user to Home page so app can show login modal or landing instead
+      window.location.href = "/";
     }
     return Promise.reject(error);
   },
