@@ -49,7 +49,7 @@ const RegisterModal: React.FC<Props> = ({ open, onClose, onSwitchToLogin }) => {
       const payload = {
         name,
         email,
-        mobileNumber: mobile,
+        mobile: mobile,
         password,
         password_confirmation: passwordConfirmation,
         isCompanyEmployee: false,
